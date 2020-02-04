@@ -2,37 +2,39 @@ package classes;
 
 
 public class Ecrire {
-    private int id_auteur;
-    private String isbn;
+    private Auteur auteur;
+    private Ouvrage ouvrage;
 
     public Ecrire() {
     }
 
-    public Ecrire(int id_auteur, String isbn) {
-        this.id_auteur = id_auteur;
-        this.isbn = isbn;
+    public Ecrire(Auteur auteur, Ouvrage ouvrage) {
+        this.auteur = auteur;
+        this.ouvrage = ouvrage;
     }
 
-    public int getId_auteur() {
-        return id_auteur;
+    public Auteur getAuteur() {
+        return auteur;
     }
 
-    public void setId_auteur(int id_auteur) {
-        this.id_auteur = id_auteur;
+    public void setAuteur(Auteur auteur) {
+        this.auteur = auteur;
     }
 
-    public String getIsbn() {
-        return isbn;
+    public Ouvrage getOuvrage() {
+        return ouvrage;
     }
 
-    public void setIsbn(String isbn) {
-        this.isbn = isbn;
+    public void setOuvrage(Ouvrage ouvrage) {
+        this.ouvrage = ouvrage;
     }
 
     @Override
     public String toString() {
-        return "Ecrire{" + "id_auteur=" + id_auteur + ", isbn=" + isbn + '}';
+        return "Ecrire{" + "auteur=" + auteur + ", ouvrage=" + ouvrage + '}';
     }
+
+    
     
     
 }

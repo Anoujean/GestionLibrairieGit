@@ -3,8 +3,8 @@ package classes;
 public class Ouvrage implements Comparable<Ouvrage>{
 
     private String isbn;
-    private int id_sous_theme;
-    private int id_statut;
+    private Sous_theme sous_theme ;
+    private Statut statut;
     private String titre;
     private String image;
     private String sous_titre;
@@ -16,10 +16,10 @@ public class Ouvrage implements Comparable<Ouvrage>{
     public Ouvrage() {
     }
 
-    public Ouvrage(String isbn, int id_sous_theme, int id_statut, String titre, String image, String sous_titre, String resume, float stock, float tva, String commentaire) {
+    public Ouvrage(String isbn, Sous_theme sous_theme, Statut statut, String titre, String image, String sous_titre, String resume, float stock, float tva, String commentaire) {
         this.isbn = isbn;
-        this.id_sous_theme = id_sous_theme;
-        this.id_statut = id_statut;
+        this.sous_theme = sous_theme;
+        this.statut = statut;
         this.titre = titre;
         this.image = image;
         this.sous_titre = sous_titre;
@@ -56,20 +56,20 @@ public class Ouvrage implements Comparable<Ouvrage>{
         this.isbn = isbn;
     }
 
-    public int getId_sous_theme() {
-        return id_sous_theme;
+    public Sous_theme getSous_theme() {
+        return sous_theme;
     }
 
-    public void setId_sous_theme(int id_sous_theme) {
-        this.id_sous_theme = id_sous_theme;
+    public void setSous_theme(Sous_theme sous_theme) {
+        this.sous_theme = sous_theme;
     }
 
-    public int getId_statut() {
-        return id_statut;
+    public Statut getStatut() {
+        return statut;
     }
 
-    public void setId_statut(int id_statut) {
-        this.id_statut = id_statut;
+    public void setStatut(Statut statut) {
+        this.statut = statut;
     }
 
     public String getTitre() {
@@ -127,9 +127,8 @@ public class Ouvrage implements Comparable<Ouvrage>{
     public void setCommentaire(String commentaire) {
         this.commentaire = commentaire;
     }
-    
-    
 
+    
     @Override
     public String toString() {
         String s;
@@ -137,7 +136,7 @@ public class Ouvrage implements Comparable<Ouvrage>{
             s = "Ouvrage{" + ", titre=" + titre + ", image=" + image + ", sous_titre=" + sous_titre + ", resume=" + resume + ", stock=" + stock + ", tva=" + tva + ", commentaire=" + commentaire + '}';
 
         } else {
-            s = "Ouvrage{" + "isbn=" + isbn + ", id_sous_theme=" + id_sous_theme + ", id_statut=" + id_statut + ", titre=" + titre + ", image=" + image + ", sous_titre=" + sous_titre + ", resume=" + resume + ", stock=" + stock + ", tva=" + tva + ", commentaire=" + commentaire + '}';
+            s = "Ouvrage{" + "isbn=" + isbn + ", sous_theme=" + sous_theme + ", statut=" + statut + ", titre=" + titre + ", image=" + image + ", sous_titre=" + sous_titre + ", resume=" + resume + ", stock=" + stock + ", tva=" + tva + ", commentaire=" + commentaire + '}';
 
         }
         return s;

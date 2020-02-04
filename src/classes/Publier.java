@@ -2,8 +2,8 @@ package classes;
 
 public class Publier {
     
-    private String isbn;
-    private int id_editeur;
+    private Ouvrage ouvrage;
+    private Editeur editeur;
     private float poids;
     private float prix;
     private String dimensions;
@@ -12,9 +12,9 @@ public class Publier {
     public Publier() {
     }
 
-    public Publier(String isbn, int id_editeur, float poids, float prix, String dimensions, String nombre_page) {
-        this.isbn = isbn;
-        this.id_editeur = id_editeur;
+    public Publier(Ouvrage ouvrage, Editeur editeur, float poids, float prix, String dimensions, String nombre_page) {
+        this.ouvrage = ouvrage;
+        this.editeur = editeur;
         this.poids = poids;
         this.prix = prix;
         this.dimensions = dimensions;
@@ -28,20 +28,20 @@ public class Publier {
         this.nombre_page = nombre_page;
     }
 
-    public String getIsbn() {
-        return isbn;
+    public Ouvrage getOuvrage() {
+        return ouvrage;
     }
 
-    public void setIsbn(String isbn) {
-        this.isbn = isbn;
+    public void setOuvrage(Ouvrage ouvrage) {
+        this.ouvrage = ouvrage;
     }
 
-    public int getId_editeur() {
-        return id_editeur;
+    public Editeur getEditeur() {
+        return editeur;
     }
 
-    public void setId_editeur(int id_editeur) {
-        this.id_editeur = id_editeur;
+    public void setEditeur(Editeur editeur) {
+        this.editeur = editeur;
     }
 
     public float getPoids() {
@@ -78,9 +78,9 @@ public class Publier {
 
     @Override
     public String toString() {
-        return "Publier{" + "isbn=" + isbn + ", id_editeur=" + id_editeur + ", poids=" + poids + ", prix=" + prix + ", dimensions=" + dimensions + ", nombre_page=" + nombre_page + '}';
+        return "Publier{" + "ouvrage=" + ouvrage + ", editeur=" + editeur + ", poids=" + poids + ", prix=" + prix + ", dimensions=" + dimensions + ", nombre_page=" + nombre_page + '}';
     }
-
-
     
+    
+
 }

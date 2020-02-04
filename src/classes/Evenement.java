@@ -3,7 +3,7 @@ package classes;
 public class Evenement implements Comparable<Evenement>{
 
     private int id_evenement = 0;
-    private int id_statut;
+    private Statut statut;
     private String libelle;
     private String date_debut;
     private String date_fin;
@@ -15,9 +15,9 @@ public class Evenement implements Comparable<Evenement>{
     public Evenement() {
     }
 
-    public Evenement(int id_evenement, int id_statut, String libelle, String date_debut, String date_fin, String description, String image, float remise, String commentaire) {
+    public Evenement(int id_evenement, Statut statut, String libelle, String date_debut, String date_fin, String description, String image, float remise, String commentaire) {
         this.id_evenement = id_evenement;
-        this.id_statut = id_statut;
+        this.statut = statut;
         this.libelle = libelle;
         this.date_debut = date_debut;
         this.date_fin = date_fin;
@@ -27,8 +27,8 @@ public class Evenement implements Comparable<Evenement>{
         this.commentaire = commentaire;
     }
 
-    public Evenement(int id_statut, String libelle, String date_debut, String date_fin, String description, String image, float remise, String commentaire) {
-        this.id_statut = id_statut;
+    public Evenement(Statut statut, String libelle, String date_debut, String date_fin, String description, String image, float remise, String commentaire) {
+        this.statut = statut;
         this.libelle = libelle;
         this.date_debut = date_debut;
         this.date_fin = date_fin;
@@ -38,8 +38,8 @@ public class Evenement implements Comparable<Evenement>{
         this.commentaire = commentaire;
     }
 
-    public Evenement(int id_statut, String libelle, String date_debut, String date_fin, String description, String image, float remise) {
-        this.id_statut = id_statut;
+    public Evenement(Statut statut, String libelle, String date_debut, String date_fin, String description, String image, float remise) {
+        this.statut = statut;
         this.libelle = libelle;
         this.date_debut = date_debut;
         this.date_fin = date_fin;
@@ -56,12 +56,12 @@ public class Evenement implements Comparable<Evenement>{
         this.id_evenement = id_evenement;
     }
 
-    public int getId_statut() {
-        return id_statut;
+    public Statut getStatut() {
+        return statut;
     }
 
-    public void setId_statut(int id_statut) {
-        this.id_statut = id_statut;
+    public void setStatut(Statut statut) {
+        this.statut = statut;
     }
 
     public String getLibelle() {
@@ -120,6 +120,7 @@ public class Evenement implements Comparable<Evenement>{
         this.commentaire = commentaire;
     }
 
+   
     @Override
     public String toString() {
         String s;
@@ -127,7 +128,7 @@ public class Evenement implements Comparable<Evenement>{
             s = "Evenement{" + ", libelle=" + libelle + ", date_debut=" + date_debut + ", date_fin=" + date_fin + ", description=" + description + ", image=" + image + ", remise=" + remise + ", commentaire=" + commentaire + '}';
 
         } else {
-            s = "Evenement{" + "id_evenement=" + id_evenement + ", id_statut=" + id_statut + ", libelle=" + libelle + ", date_debut=" + date_debut + ", date_fin=" + date_fin + ", description=" + description + ", image=" + image + ", remise=" + remise + ", commentaire=" + commentaire + '}';
+            s = "Evenement{" + "id_evenement=" + id_evenement + ", statut=" + statut + ", libelle=" + libelle + ", date_debut=" + date_debut + ", date_fin=" + date_fin + ", description=" + description + ", image=" + image + ", remise=" + remise + ", commentaire=" + commentaire + '}';
 
         }
         return s;

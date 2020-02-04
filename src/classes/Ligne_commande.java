@@ -3,8 +3,8 @@ package classes;
 public class Ligne_commande {
 
     private int id_ligne_commande = 0;
-    private String isbn;
-    private int id_commande;
+    private Ouvrage ouvrage;
+    private Commande commande;
     private int qte;
     private float prix;
     private float tva;
@@ -13,18 +13,18 @@ public class Ligne_commande {
     public Ligne_commande() {
     }
 
-    public Ligne_commande(int id_ligne_commande, String isbn, int id_commande, int qte, float prix, float tva, float remise) {
+    public Ligne_commande(int id_ligne_commande, Ouvrage ouvrage, Commande commande, int qte, float prix, float tva, float remise) {
         this.id_ligne_commande = id_ligne_commande;
-        this.isbn = isbn;
-        this.id_commande = id_commande;
+        this.ouvrage = ouvrage;
+        this.commande = commande;
         this.qte = qte;
         this.prix = prix;
         this.tva = tva;
         this.remise = remise;
     }
 
-    public Ligne_commande(int id_commande, int qte, float prix, float tva, float remise) {
-        this.id_commande = id_commande;
+    public Ligne_commande(Commande commande, int qte, float prix, float tva, float remise) {
+        this.commande = commande;
         this.qte = qte;
         this.prix = prix;
         this.tva = tva;
@@ -39,20 +39,20 @@ public class Ligne_commande {
         this.id_ligne_commande = id_ligne_commande;
     }
 
-    public String getIsbn() {
-        return isbn;
+    public Ouvrage getOuvrage() {
+        return ouvrage;
     }
 
-    public void setIsbn(String isbn) {
-        this.isbn = isbn;
+    public void setOuvrage(Ouvrage ouvrage) {
+        this.ouvrage = ouvrage;
     }
 
-    public int getId_commande() {
-        return id_commande;
+    public Commande getCommande() {
+        return commande;
     }
 
-    public void setId_commande(int id_commande) {
-        this.id_commande = id_commande;
+    public void setCommande(Commande commande) {
+        this.commande = commande;
     }
 
     public int getQte() {
@@ -87,6 +87,7 @@ public class Ligne_commande {
         this.remise = remise;
     }
 
+   
     @Override
     public String toString() {
         String s;
@@ -94,7 +95,7 @@ public class Ligne_commande {
             s = "Ligne_commande{" + ", qte=" + qte + ", prix=" + prix + ", tva=" + tva + ", remise=" + remise + '}';
 
         } else {
-            s = "Ligne_commande{" + "id_ligne_commande=" + id_ligne_commande + ", isbn=" + isbn + ", id_commande=" + id_commande + ", qte=" + qte + ", prix=" + prix + ", tva=" + tva + ", remise=" + remise + '}';
+            s = "Ligne_commande{" + "id_ligne_commande=" + id_ligne_commande + ", ouvrage=" + ouvrage + ", commande=" + commande + ", qte=" + qte + ", prix=" + prix + ", tva=" + tva + ", remise=" + remise + '}';
 
         }
         return s;

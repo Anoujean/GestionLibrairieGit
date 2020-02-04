@@ -4,7 +4,7 @@ package classes;
 
 public class Transporteur implements Comparable<Transporteur>{
     private int id_transporteur = 0;
-    private int id_statut;
+    private Statut statut;
     private String libelle;
     private String tel;
     private String mail;
@@ -12,16 +12,16 @@ public class Transporteur implements Comparable<Transporteur>{
     public Transporteur() {
     }
 
-    public Transporteur(int id_transporteur, int id_statut, String libelle, String tel, String mail) {
+    public Transporteur(int id_transporteur, Statut statut, String libelle, String tel, String mail) {
         this.id_transporteur = id_transporteur;
-        this.id_statut = id_statut;
+        this.statut = statut;
         this.libelle = libelle;
         this.tel = tel;
         this.mail = mail;
     }
 
-    public Transporteur(int id_statut, String libelle, String tel, String mail) {
-        this.id_statut = id_statut;
+    public Transporteur(Statut statut, String libelle, String tel, String mail) {
+        this.statut = statut;
         this.libelle = libelle;
         this.tel = tel;
         this.mail = mail;
@@ -35,12 +35,12 @@ public class Transporteur implements Comparable<Transporteur>{
         this.id_transporteur = id_transporteur;
     }
 
-    public int getId_statut() {
-        return id_statut;
+    public Statut getStatut() {
+        return statut;
     }
 
-    public void setId_statut(int id_statut) {
-        this.id_statut = id_statut;
+    public void setStatut(Statut statut) {
+        this.statut = statut;
     }
 
     public String getLibelle() {
@@ -67,13 +67,15 @@ public class Transporteur implements Comparable<Transporteur>{
         this.mail = mail;
     }
 
+    
+
     @Override
     public String toString() {
         String s;
         if(id_transporteur>0){
-             s= super.toString() + "Transporteur{" + "id_transporteur=" + id_transporteur + ", id_statut=" + id_statut + ", libelle=" + libelle + ", tel=" + tel + ", mail=" + mail + '}';
+             s= super.toString() + "Transporteur{" + "id_transporteur=" + id_transporteur + ", statut=" + statut + ", libelle=" + libelle + ", tel=" + tel + ", mail=" + mail + '}';
         }else{
-             s= super.toString() + "Transporteur{" + ", id_statut=" + id_statut + ", libelle=" + libelle + ", tel=" + tel + ", mail=" + mail + '}';
+             s= super.toString() + "Transporteur{" + ", statut=" + statut + ", libelle=" + libelle + ", tel=" + tel + ", mail=" + mail + '}';
         }
         return s;
        

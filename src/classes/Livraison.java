@@ -3,18 +3,18 @@ package classes;
 public class Livraison {
 
     private int id_livraison;
-    private int id_transporteur;
-    private int id_commande;
+    private Transporteur transporteur;
+    private Commande commande;
     private String date_motif;
     private String motif;
 
     public Livraison() {
     }
 
-    public Livraison(int id_livraison, int id_transporteur, int id_commande, String date_motif, String motif) {
+    public Livraison(int id_livraison, Transporteur transporteur, Commande commande, String date_motif, String motif) {
         this.id_livraison = id_livraison;
-        this.id_transporteur = id_transporteur;
-        this.id_commande = id_commande;
+        this.transporteur = transporteur;
+        this.commande = commande;
         this.date_motif = date_motif;
         this.motif = motif;
     }
@@ -32,20 +32,20 @@ public class Livraison {
         this.id_livraison = id_livraison;
     }
 
-    public int getId_transporteur() {
-        return id_transporteur;
+    public Transporteur getTransporteur() {
+        return transporteur;
     }
 
-    public void setId_transporteur(int id_transporteur) {
-        this.id_transporteur = id_transporteur;
+    public void setTransporteur(Transporteur transporteur) {
+        this.transporteur = transporteur;
     }
 
-    public int getId_commande() {
-        return id_commande;
+    public Commande getCommande() {
+        return commande;
     }
 
-    public void setId_commande(int id_commande) {
-        this.id_commande = id_commande;
+    public void setCommande(Commande commande) {
+        this.commande = commande;
     }
 
     public String getDate_motif() {
@@ -64,6 +64,7 @@ public class Livraison {
         this.motif = motif;
     }
 
+
     @Override
     public String toString() {
         String s;
@@ -71,7 +72,7 @@ public class Livraison {
             s = "Livraison{" + ", date_motif=" + date_motif + ", motif=" + motif + '}';
 
         } else {
-            s = "Livraison{" + "id_livraison=" + id_livraison + ", id_transporteur=" + id_transporteur + ", id_commande=" + id_commande + ", date_motif=" + date_motif + ", motif=" + motif + '}';
+            s = "Livraison{" + "id_livraison=" + id_livraison + ", transporteur=" + transporteur + ", commande=" + commande + ", date_motif=" + date_motif + ", motif=" + motif + '}';
 
         }
         return s;

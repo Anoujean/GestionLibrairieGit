@@ -3,18 +3,18 @@ package classes;
 public class Paiement implements Comparable<Paiement>{
 
     private int id_paiement;
-    private int id_organisme_paiement;
-    private int id_statut;
+    private Organisme_Paiement organisme_paiement;
+    private Statut statut;
     private String numero_transaction;
     private String date;
 
     public Paiement() {
     }
 
-    public Paiement(int id_paiement, int id_organisme_paiement, int id_statut, String numero_transaction, String date) {
+    public Paiement(int id_paiement, Organisme_Paiement organisme_paiement, Statut statut, String numero_transaction, String date) {
         this.id_paiement = id_paiement;
-        this.id_organisme_paiement = id_organisme_paiement;
-        this.id_statut = id_statut;
+        this.organisme_paiement = organisme_paiement;
+        this.statut = statut;
         this.numero_transaction = numero_transaction;
         this.date = date;
     }
@@ -32,20 +32,20 @@ public class Paiement implements Comparable<Paiement>{
         this.id_paiement = id_paiement;
     }
 
-    public int getId_organisme_paiement() {
-        return id_organisme_paiement;
+    public Organisme_Paiement getOrganisme_paiement() {
+        return organisme_paiement;
     }
 
-    public void setId_organisme_paiement(int id_organisme_paiement) {
-        this.id_organisme_paiement = id_organisme_paiement;
+    public void setOrganisme_paiement(Organisme_Paiement organisme_paiement) {
+        this.organisme_paiement = organisme_paiement;
     }
 
-    public int getId_statut() {
-        return id_statut;
+    public Statut getStatut() {
+        return statut;
     }
 
-    public void setId_statut(int id_statut) {
-        this.id_statut = id_statut;
+    public void setStatut(Statut statut) {
+        this.statut = statut;
     }
 
     public String getNumero_transaction() {
@@ -64,6 +64,7 @@ public class Paiement implements Comparable<Paiement>{
         this.date = date;
     }
 
+   
     @Override
     public String toString() {
         String s;
@@ -71,7 +72,7 @@ public class Paiement implements Comparable<Paiement>{
             s = "Paiement{" + ", numero_transaction=" + numero_transaction + ", date=" + date + '}';
 
         } else {
-            s = "Paiement{" + "id_paiement=" + id_paiement + ", id_organisme_paiement=" + id_organisme_paiement + ", id_statut=" + id_statut + ", numero_transaction=" + numero_transaction + ", date=" + date + '}';
+            s = "Paiement{" + "id_paiement=" + id_paiement + ", organisme_paiement=" + organisme_paiement + ", statut=" + statut + ", numero_transaction=" + numero_transaction + ", date=" + date + '}';
 
         }
         return s;

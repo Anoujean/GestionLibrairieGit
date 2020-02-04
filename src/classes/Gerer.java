@@ -2,37 +2,39 @@ package classes;
 
 
 public class Gerer {
-    private int id_employe;
-    private String isbn;
+    private Employe employe;
+    private Ouvrage ouvrage;
 
     public Gerer() {
     }
 
-    public Gerer(int id_employe, String isbn) {
-        this.id_employe = id_employe;
-        this.isbn = isbn;
+    public Gerer(Employe employe, Ouvrage ouvrage) {
+        this.employe = employe;
+        this.ouvrage = ouvrage;
     }
 
-    public int getId_employe() {
-        return id_employe;
+    public Employe getEmploye() {
+        return employe;
     }
 
-    public void setId_employe(int id_employe) {
-        this.id_employe = id_employe;
+    public void setEmploye(Employe employe) {
+        this.employe = employe;
     }
 
-    public String getIsbn() {
-        return isbn;
+    public Ouvrage getOuvrage() {
+        return ouvrage;
     }
 
-    public void setIsbn(String isbn) {
-        this.isbn = isbn;
+    public void setOuvrage(Ouvrage ouvrage) {
+        this.ouvrage = ouvrage;
     }
 
     @Override
     public String toString() {
-        return "Gerer{" + "id_employe=" + id_employe + ", isbn=" + isbn + '}';
+        return "Gerer{" + "employe=" + employe + ", ouvrage=" + ouvrage + '}';
     }
+
+   
     
     
 }

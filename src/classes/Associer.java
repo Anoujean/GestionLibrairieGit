@@ -2,38 +2,38 @@ package classes;
 
 
 public class Associer {
-    private String isbn;
-    private int id_mot_clef;
+    private Ouvrage ouvrage;
+    private Mot_clef mot_clef;
 
     public Associer() {
     }
 
-    public Associer(String isbn, int id_mot_clef) {
-        this.isbn = isbn;
-        this.id_mot_clef = id_mot_clef;
+    public Associer(Ouvrage ouvrage, Mot_clef mot_clef) {
+        this.ouvrage = ouvrage;
+        this.mot_clef = mot_clef;
     }
 
-    public String getIsbn() {
-        return isbn;
+    public Ouvrage getOuvrage() {
+        return ouvrage;
     }
 
-    public void setIsbn(String isbn) {
-        this.isbn = isbn;
+    public void setOuvrage(Ouvrage ouvrage) {
+        this.ouvrage = ouvrage;
     }
 
-    public int getId_mot_clef() {
-        return id_mot_clef;
+    public Mot_clef getMot_clef() {
+        return mot_clef;
     }
 
-    public void setId_mot_clef(int id_mot_clef) {
-        this.id_mot_clef = id_mot_clef;
+    public void setMot_clef(Mot_clef mot_clef) {
+        this.mot_clef = mot_clef;
     }
 
     @Override
     public String toString() {
-        return "Associer{" + "isbn=" + isbn + ", id_mot_clef=" + id_mot_clef + '}';
+        return "Associer{" + "ouvrage=" + ouvrage + ", mot_clef=" + mot_clef + '}';
     }
-    
+
     
     
 }

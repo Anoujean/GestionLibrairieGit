@@ -3,15 +3,15 @@ package classes;
 public class Sous_theme implements Comparable<Sous_theme> {
 
     private int id_sous_theme;
-    private int id_theme;
+    private Theme theme;
     private String libelle;
 
     public Sous_theme() {
     }
 
-    public Sous_theme(int id_sous_theme, int id_theme, String libelle) {
+    public Sous_theme(int id_sous_theme, Theme theme, String libelle) {
         this.id_sous_theme = id_sous_theme;
-        this.id_theme = id_theme;
+        this.theme = theme;
         this.libelle = libelle;
     }
 
@@ -27,12 +27,12 @@ public class Sous_theme implements Comparable<Sous_theme> {
         this.id_sous_theme = id_sous_theme;
     }
 
-    public int getId_theme() {
-        return id_theme;
+    public Theme getTheme() {
+        return theme;
     }
 
-    public void setId_theme(int id_theme) {
-        this.id_theme = id_theme;
+    public void setTheme(Theme theme) {
+        this.theme = theme;
     }
 
     public String getLibelle() {
@@ -43,6 +43,8 @@ public class Sous_theme implements Comparable<Sous_theme> {
         this.libelle = libelle;
     }
 
+    
+
     @Override
     public String toString() {
         String s;
@@ -50,7 +52,7 @@ public class Sous_theme implements Comparable<Sous_theme> {
             s = "Sous_theme{" + ", libelle=" + libelle + '}';
 
         } else {
-            s = "Sous_theme{" + "id_sous_theme=" + id_sous_theme + ", id_theme=" + id_theme + ", libelle=" + libelle + '}';
+            s = "Sous_theme{" + "id_sous_theme=" + id_sous_theme + ", theme=" + theme + ", libelle=" + libelle + '}';
 
         }
         return s;

@@ -3,11 +3,11 @@ package classes;
 public class Commentaire {
 
     private int id_commentaire;
-    private int id_membre;
-    private int id_ligne_commande;
-    private int isbn;
-    private int id_statut;
-    private int id_employe;
+    private Membre membre;
+    private Ligne_commande ligne_commande;
+    private Ouvrage ouvrage;
+    private Statut statut;
+    private Employe employe;
     private String objet;
     private String contenu;
     private int note;
@@ -17,13 +17,13 @@ public class Commentaire {
     public Commentaire() {
     }
 
-    public Commentaire(int id_commentaire, int id_membre, int id_ligne_commande, int isbn, int id_statut, int id_employe, String objet, String contenu, int note, String adresse_ip, String commentaire) {
+    public Commentaire(int id_commentaire, Membre membre, Ligne_commande ligne_commande, Ouvrage ouvrage, Statut statut, Employe employe, String objet, String contenu, int note, String adresse_ip, String commentaire) {
         this.id_commentaire = id_commentaire;
-        this.id_membre = id_membre;
-        this.id_ligne_commande = id_ligne_commande;
-        this.isbn = isbn;
-        this.id_statut = id_statut;
-        this.id_employe = id_employe;
+        this.membre = membre;
+        this.ligne_commande = ligne_commande;
+        this.ouvrage = ouvrage;
+        this.statut = statut;
+        this.employe = employe;
         this.objet = objet;
         this.contenu = contenu;
         this.note = note;
@@ -31,12 +31,12 @@ public class Commentaire {
         this.commentaire = commentaire;
     }
 
-    public Commentaire(int id_membre, int id_ligne_commande, int isbn, int id_statut, int id_employe, String objet, String contenu, int note, String adresse_ip, String commentaire) {
-        this.id_membre = id_membre;
-        this.id_ligne_commande = id_ligne_commande;
-        this.isbn = isbn;
-        this.id_statut = id_statut;
-        this.id_employe = id_employe;
+    public Commentaire(Membre membre, Ligne_commande ligne_commande, Ouvrage ouvrage, Statut statut, Employe employe, String objet, String contenu, int note, String adresse_ip, String commentaire) {
+        this.membre = membre;
+        this.ligne_commande = ligne_commande;
+        this.ouvrage = ouvrage;
+        this.statut = statut;
+        this.employe = employe;
         this.objet = objet;
         this.contenu = contenu;
         this.note = note;
@@ -44,12 +44,12 @@ public class Commentaire {
         this.commentaire = commentaire;
     }
 
-    public Commentaire(int id_membre, int id_ligne_commande, int isbn, int id_statut, int id_employe, String objet, String contenu, int note, String adresse_ip) {
-        this.id_membre = id_membre;
-        this.id_ligne_commande = id_ligne_commande;
-        this.isbn = isbn;
-        this.id_statut = id_statut;
-        this.id_employe = id_employe;
+    public Commentaire(Membre membre, Ligne_commande ligne_commande, Ouvrage ouvrage, Statut statut, Employe employe, String objet, String contenu, int note, String adresse_ip) {
+        this.membre = membre;
+        this.ligne_commande = ligne_commande;
+        this.ouvrage = ouvrage;
+        this.statut = statut;
+        this.employe = employe;
         this.objet = objet;
         this.contenu = contenu;
         this.note = note;
@@ -64,44 +64,44 @@ public class Commentaire {
         this.id_commentaire = id_commentaire;
     }
 
-    public int getId_membre() {
-        return id_membre;
+    public Membre getMembre() {
+        return membre;
     }
 
-    public void setId_membre(int id_membre) {
-        this.id_membre = id_membre;
+    public void setMembre(Membre membre) {
+        this.membre = membre;
     }
 
-    public int getId_ligne_commande() {
-        return id_ligne_commande;
+    public Ligne_commande getLigne_commande() {
+        return ligne_commande;
     }
 
-    public void setId_ligne_commande(int id_ligne_commande) {
-        this.id_ligne_commande = id_ligne_commande;
+    public void setLigne_commande(Ligne_commande ligne_commande) {
+        this.ligne_commande = ligne_commande;
     }
 
-    public int getIsbn() {
-        return isbn;
+    public Ouvrage getOuvrage() {
+        return ouvrage;
     }
 
-    public void setIsbn(int isbn) {
-        this.isbn = isbn;
+    public void setOuvrage(Ouvrage ouvrage) {
+        this.ouvrage = ouvrage;
     }
 
-    public int getId_statut() {
-        return id_statut;
+    public Statut getStatut() {
+        return statut;
     }
 
-    public void setId_statut(int id_statut) {
-        this.id_statut = id_statut;
+    public void setStatut(Statut statut) {
+        this.statut = statut;
     }
 
-    public int getId_employe() {
-        return id_employe;
+    public Employe getEmploye() {
+        return employe;
     }
 
-    public void setId_employe(int id_employe) {
-        this.id_employe = id_employe;
+    public void setEmploye(Employe employe) {
+        this.employe = employe;
     }
 
     public String getObjet() {
@@ -143,7 +143,7 @@ public class Commentaire {
     public void setCommentaire(String commentaire) {
         this.commentaire = commentaire;
     }
-
+    
     @Override
     public String toString() {
         String s;
@@ -151,7 +151,7 @@ public class Commentaire {
             s = "Commentaire{" + ", objet=" + objet + ", contenu=" + contenu + ", note=" + note + ", adresse_ip=" + adresse_ip + ", commentaire=" + commentaire + '}';
 
         } else {
-            s = "Commentaire{" + "id_commentaire=" + id_commentaire + ", id_membre=" + id_membre + ", id_ligne_commande=" + id_ligne_commande + ", isbn=" + isbn + ", id_statut=" + id_statut + ", id_employe=" + id_employe + ", objet=" + objet + ", contenu=" + contenu + ", note=" + note + ", adresse_ip=" + adresse_ip + ", commentaire=" + commentaire + '}';
+            s = "Commentaire{" + "id_commentaire=" + id_commentaire + ", membre=" + membre + ", ligne_commande=" + ligne_commande + ", ouvrage=" + ouvrage + ", statut=" + statut + ", employe=" + employe + ", objet=" + objet + ", contenu=" + contenu + ", note=" + note + ", adresse_ip=" + adresse_ip + ", commentaire=" + commentaire + '}';
 
         }
         return s;

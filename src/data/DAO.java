@@ -30,7 +30,7 @@ public class DAO {
 
         try {
             String connectionUrl = "jdbc:sqlserver://localhost:1433;"
-                    + "databaseName=Librairie;user=sa;password=sa";
+                    + "databaseName=LibrairieTest;user=sa;password=sa";
 
             this.connexion = DriverManager.getConnection(connectionUrl);
         } catch (SQLException ex) {

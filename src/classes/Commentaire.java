@@ -11,13 +11,14 @@ public class Commentaire {
     private String objet;
     private String contenu;
     private int note;
+    private String date;
     private String adresse_ip;
     private String commentaire;
 
     public Commentaire() {
     }
 
-    public Commentaire(int id_commentaire, Membre membre, Ligne_commande ligne_commande, Ouvrage ouvrage, Statut statut, Employe employe, String objet, String contenu, int note, String adresse_ip, String commentaire) {
+    public Commentaire(int id_commentaire, Membre membre, Ligne_commande ligne_commande, Ouvrage ouvrage, Statut statut, Employe employe, String objet, String contenu, int note, String date, String adresse_ip, String commentaire) {
         this.id_commentaire = id_commentaire;
         this.membre = membre;
         this.ligne_commande = ligne_commande;
@@ -27,11 +28,12 @@ public class Commentaire {
         this.objet = objet;
         this.contenu = contenu;
         this.note = note;
+        this.date = date;
         this.adresse_ip = adresse_ip;
         this.commentaire = commentaire;
     }
 
-    public Commentaire(Membre membre, Ligne_commande ligne_commande, Ouvrage ouvrage, Statut statut, Employe employe, String objet, String contenu, int note, String adresse_ip, String commentaire) {
+    public Commentaire(Membre membre, Ligne_commande ligne_commande, Ouvrage ouvrage, Statut statut, Employe employe, String objet, String contenu, int note, String date, String adresse_ip, String commentaire) {
         this.membre = membre;
         this.ligne_commande = ligne_commande;
         this.ouvrage = ouvrage;
@@ -44,7 +46,7 @@ public class Commentaire {
         this.commentaire = commentaire;
     }
 
-    public Commentaire(Membre membre, Ligne_commande ligne_commande, Ouvrage ouvrage, Statut statut, Employe employe, String objet, String contenu, int note, String adresse_ip) {
+    public Commentaire(Membre membre, Ligne_commande ligne_commande, Ouvrage ouvrage, Statut statut, Employe employe, String objet, String contenu, int note, String date, String adresse_ip) {
         this.membre = membre;
         this.ligne_commande = ligne_commande;
         this.ouvrage = ouvrage;
@@ -134,6 +136,14 @@ public class Commentaire {
 
     public void setAdresse_ip(String adresse_ip) {
         this.adresse_ip = adresse_ip;
+    }
+    
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
     }
 
     public String getCommentaire() {

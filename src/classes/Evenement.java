@@ -2,7 +2,7 @@ package classes;
 
 public class Evenement implements Comparable<Evenement>{
 
-    private int id_evenement = 0;
+    private int id_evenement;
     private Statut statut;
     private String libelle;
     private String date_debut;

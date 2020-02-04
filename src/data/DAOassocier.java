@@ -5,27 +5,26 @@
  */
 package data;
 
-import java.sql.*;
-import java.util.*;
 import classes.*;
+import java.sql.*;
 
 /**
  *
  * @author cda402
  */
-public class DAOsous_theme extends DAO{
-    
-    public DAOsous_theme() {
+public class DAOassocier extends DAO{
+
+    public DAOassocier() {
         super();
     }
     
-    public void insert(Sous_theme st) {
+    public void insert(Associer a) {
 
         try {
-            String query = "INSERT INTO sous_theme(id_theme, libelle) VALUES (?,?);";
+            String query = "INSERT INTO Associer (isbn, id_mot_clef) VALUES (?,?);";
             PreparedStatement pstmt = getConnection().prepareStatement(query);
-            pstmt.setInt(1, st.getTheme().getId_theme());
-            pstmt.setString(1, st.getLibelle());
+            pstmt.setString(1, a.getOuvrage().getIsbn());
+            pstmt.setInt(2, a.getMot_clef().getId_mot_clef());
 
             int result = pstmt.executeUpdate();
 
@@ -39,13 +38,13 @@ public class DAOsous_theme extends DAO{
 
     }
 
-    public void update(Sous_theme st) {
+    public void Delete(Associer a) {
+        
         try {
-            String query = "UPDATE sous_theme SET id_theme = ? , libelle = ? WHERE id_sous_theme = ? ;";
+            String query = "DELETE FROM Associer WHERE isbn = ? and id_mot_clef = ?;";
             PreparedStatement pstmt = getConnection().prepareStatement(query);
-            pstmt.setInt(1, st.getTheme().getId_theme());
-            pstmt.setString(2, st.getLibelle());
-            pstmt.setInt(3, st.getId_sous_theme());
+            pstmt.setString(1, a.getOuvrage().getIsbn());
+            pstmt.setInt(2, a.getMot_clef().getId_mot_clef());
 
             int result = pstmt.executeUpdate();
 
@@ -56,8 +55,8 @@ public class DAOsous_theme extends DAO{
         } catch (SQLException ex) {
             System.err.println("Oops:SQL:" + ex.getErrorCode() + "/" + ex.getMessage());
         }
+        
     }
-    
     
     
 }

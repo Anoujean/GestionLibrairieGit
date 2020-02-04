@@ -5,28 +5,28 @@
  */
 package data;
 
-import java.sql.*;
-import java.util.*;
 import classes.*;
+import java.sql.*;
 
 /**
  *
  * @author cda402
  */
-public class DAOsous_theme extends DAO{
-    
-    public DAOsous_theme() {
+public class DAOediteur extends DAO{
+
+    public DAOediteur() {
         super();
     }
     
-    public void insert(Sous_theme st) {
+    public void insert(Editeur e) {
 
         try {
-            String query = "INSERT INTO sous_theme(id_theme, libelle) VALUES (?,?);";
+            String query = "INSERT INTO Editeur (nom, email, telephone) VALUES (?,?,?);";
             PreparedStatement pstmt = getConnection().prepareStatement(query);
-            pstmt.setInt(1, st.getTheme().getId_theme());
-            pstmt.setString(1, st.getLibelle());
-
+            pstmt.setString(1, e.getNom());
+            pstmt.setString(2, e.getEmail());
+            pstmt.setString(3, e.getTelephone());
+            
             int result = pstmt.executeUpdate();
 
             System.out.println("resultat:" + result);
@@ -39,13 +39,15 @@ public class DAOsous_theme extends DAO{
 
     }
 
-    public void update(Sous_theme st) {
+    public void update(Editeur e) {
+        
         try {
-            String query = "UPDATE sous_theme SET id_theme = ? , libelle = ? WHERE id_sous_theme = ? ;";
+            String query = "UPDATE Editeur SET nom = ? , email = ? , telephone = ? WHERE id_editeur = ?;";
             PreparedStatement pstmt = getConnection().prepareStatement(query);
-            pstmt.setInt(1, st.getTheme().getId_theme());
-            pstmt.setString(2, st.getLibelle());
-            pstmt.setInt(3, st.getId_sous_theme());
+            pstmt.setString(1, e.getNom());
+            pstmt.setString(2, e.getEmail());
+            pstmt.setString(3, e.getTelephone());
+            pstmt.setInt(4, e.getId_editeur());
 
             int result = pstmt.executeUpdate();
 
@@ -56,6 +58,7 @@ public class DAOsous_theme extends DAO{
         } catch (SQLException ex) {
             System.err.println("Oops:SQL:" + ex.getErrorCode() + "/" + ex.getMessage());
         }
+        
     }
     
     

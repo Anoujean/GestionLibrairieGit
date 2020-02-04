@@ -5,27 +5,27 @@
  */
 package data;
 
-import java.sql.*;
-import java.util.*;
 import classes.*;
+import java.sql.*;
 
 /**
  *
  * @author cda402
  */
-public class DAOsous_theme extends DAO{
-    
-    public DAOsous_theme() {
+public class DAOecrire extends DAO{
+
+    public DAOecrire() {
         super();
     }
     
-    public void insert(Sous_theme st) {
+    public void insert(Ecrire e) {
 
         try {
-            String query = "INSERT INTO sous_theme(id_theme, libelle) VALUES (?,?);";
+            String query = "INSERT INTO Ecrire (id_auteur, isbn) VALUES (?,?);";
             PreparedStatement pstmt = getConnection().prepareStatement(query);
-            pstmt.setInt(1, st.getTheme().getId_theme());
-            pstmt.setString(1, st.getLibelle());
+            pstmt.setInt(1, e.getAuteur().getId_auteur());
+            pstmt.setString(2, e.getOuvrage().getIsbn());
+            
 
             int result = pstmt.executeUpdate();
 
@@ -39,13 +39,13 @@ public class DAOsous_theme extends DAO{
 
     }
 
-    public void update(Sous_theme st) {
+    public void Delete(Ecrire e) {
+        
         try {
-            String query = "UPDATE sous_theme SET id_theme = ? , libelle = ? WHERE id_sous_theme = ? ;";
+            String query = "DELETE FROM Ecrire WHERE id_auteur = ? and isbn = ?;";
             PreparedStatement pstmt = getConnection().prepareStatement(query);
-            pstmt.setInt(1, st.getTheme().getId_theme());
-            pstmt.setString(2, st.getLibelle());
-            pstmt.setInt(3, st.getId_sous_theme());
+            pstmt.setInt(1, e.getAuteur().getId_auteur());
+            pstmt.setString(2, e.getOuvrage().getIsbn());
 
             int result = pstmt.executeUpdate();
 
@@ -56,6 +56,7 @@ public class DAOsous_theme extends DAO{
         } catch (SQLException ex) {
             System.err.println("Oops:SQL:" + ex.getErrorCode() + "/" + ex.getMessage());
         }
+        
     }
     
     

@@ -13,19 +13,18 @@ import classes.*;
  *
  * @author cda402
  */
-public class DAOsous_theme extends DAO{
-    
-    public DAOsous_theme() {
+public class DAOmot_clef extends DAO {
+
+    public DAOmot_clef() {
         super();
     }
-    
-    public void insert(Sous_theme st) {
+
+    public void insert(Mot_clef mc) {
 
         try {
-            String query = "INSERT INTO sous_theme(id_theme, libelle) VALUES (?,?);";
+            String query = "INSERT INTO Mot_clef (libelle) VALUES (?);";
             PreparedStatement pstmt = getConnection().prepareStatement(query);
-            pstmt.setInt(1, st.getTheme().getId_theme());
-            pstmt.setString(1, st.getLibelle());
+            pstmt.setString(1, mc.getLibelle());
 
             int result = pstmt.executeUpdate();
 
@@ -39,13 +38,13 @@ public class DAOsous_theme extends DAO{
 
     }
 
-    public void update(Sous_theme st) {
+    public void update(Mot_clef mc) {
+        
         try {
-            String query = "UPDATE sous_theme SET id_theme = ? , libelle = ? WHERE id_sous_theme = ? ;";
+            String query = "UPDATE Mot_clef SET libelle = ? WHERE id_mot_clef = ? ;";
             PreparedStatement pstmt = getConnection().prepareStatement(query);
-            pstmt.setInt(1, st.getTheme().getId_theme());
-            pstmt.setString(2, st.getLibelle());
-            pstmt.setInt(3, st.getId_sous_theme());
+            pstmt.setString(1, mc.getLibelle());
+            pstmt.setInt(2, mc.getId_mot_clef());
 
             int result = pstmt.executeUpdate();
 
@@ -56,8 +55,7 @@ public class DAOsous_theme extends DAO{
         } catch (SQLException ex) {
             System.err.println("Oops:SQL:" + ex.getErrorCode() + "/" + ex.getMessage());
         }
+        
     }
-    
-    
-    
+
 }

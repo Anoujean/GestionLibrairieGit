@@ -7,6 +7,8 @@ package data;
 
 import classes.*;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -16,6 +18,31 @@ public class DAOevenement extends DAO{
 
     public DAOevenement() {
         super();
+    }
+    
+    public List<Evenement> select(){
+        List<Evenement> lesEvenements = new ArrayList<>();
+        try {
+            Statement stmt = this.getConnection().createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
+
+            String query = "select e.*, s.nom_statut from evenement e, statut s where e.ID_STATUT = s.ID_STATUT;;";
+
+            ResultSet rs = stmt.executeQuery(query);
+
+            while (rs.next()) {
+                Statut leStatut = new Statut(rs.getInt("ID_STATUT"), rs.getString("NOM_STATUT"));
+                Evenement lEvenement = new Evenement(rs.getInt("ID_EVENEMENT"), leStatut, rs.getString("LIBELLE"), rs.getString("DATE_DEBUT"), rs.getString("DATE_FIN"), rs.getString("DESCRIPTION"), rs.getString("IMAGE"), rs.getFloat("REMISE"), rs.getString("COMMENTAIRE"));
+                lesEvenements.add(lEvenement);
+            }
+
+            rs.close();
+            stmt.close();
+
+        } catch (SQLException ex) {
+            System.err.println("Oops:SQL:" + ex.getErrorCode() + "/" + ex.getMessage());
+        }
+        
+        return lesEvenements;
     }
     
     public void insert(Evenement e) {

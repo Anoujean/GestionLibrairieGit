@@ -19,6 +19,30 @@ public class DAOtheme extends DAO{
         super();
     }
     
+    public List<Theme> select(){
+        List<Theme> lesThemes = new ArrayList<>();
+        try {
+            Statement stmt = this.getConnection().createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
+
+            String query = "SELECT * FROM Theme;";
+
+            ResultSet rs = stmt.executeQuery(query);
+
+            while (rs.next()) {
+                Theme leTheme = new Theme(rs.getInt("ID_THEME"), rs.getString("LIBELLE"));
+                lesThemes.add(leTheme);
+            }
+
+            rs.close();
+            stmt.close();
+
+        } catch (SQLException ex) {
+            System.err.println("Oops:SQL:" + ex.getErrorCode() + "/" + ex.getMessage());
+        }
+        
+        return lesThemes;
+    }
+    
     public void insert(Theme t) {
 
         try {

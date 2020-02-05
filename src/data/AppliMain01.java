@@ -20,7 +20,10 @@ public class AppliMain01 {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        
+        DAOecrire dao = new DAOecrire();
+        dao.open();
+        System.out.println(""+dao.select());
+        dao.close();
         
     }
     

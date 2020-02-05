@@ -7,6 +7,8 @@ package data;
 
 import classes.*;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -16,6 +18,30 @@ public class DAOauteur extends DAO{
 
     public DAOauteur() {
         super();
+    }
+    
+    public List<Auteur> select(){
+        List<Auteur> lesAuteurs = new ArrayList<>();
+        try {
+            Statement stmt = this.getConnection().createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
+
+            String query = "SELECT * FROM Auteur;";
+
+            ResultSet rs = stmt.executeQuery(query);
+
+            while (rs.next()) {
+                Auteur lAuteur = new Auteur(rs.getInt("ID_AUTEUR"), rs.getString("NOM"), rs.getString("PRENOM"), rs.getString("DATE_DE_NAISSANCE"), rs.getString("DATE_DE_DECES"));
+                lesAuteurs.add(lAuteur);
+            }
+
+            rs.close();
+            stmt.close();
+
+        } catch (SQLException ex) {
+            System.err.println("Oops:SQL:" + ex.getErrorCode() + "/" + ex.getMessage());
+        }
+        
+        return lesAuteurs;
     }
     
     public void insert(Auteur a) {

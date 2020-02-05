@@ -18,6 +18,30 @@ public class DAOmot_clef extends DAO {
     public DAOmot_clef() {
         super();
     }
+    
+    public List<Mot_clef> select(){
+        List<Mot_clef> lesMot_clefs = new ArrayList<>();
+        try {
+            Statement stmt = this.getConnection().createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
+
+            String query = "SELECT * FROM Mot_clef;";
+
+            ResultSet rs = stmt.executeQuery(query);
+
+            while (rs.next()) {
+                Mot_clef leMot_clef = new Mot_clef(rs.getInt("ID_MOT_CLEF"), rs.getString("LIBELLE"));
+                lesMot_clefs.add(leMot_clef);
+            }
+
+            rs.close();
+            stmt.close();
+
+        } catch (SQLException ex) {
+            System.err.println("Oops:SQL:" + ex.getErrorCode() + "/" + ex.getMessage());
+        }
+        
+        return lesMot_clefs;
+    }
 
     public void insert(Mot_clef mc) {
 

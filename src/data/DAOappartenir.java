@@ -18,6 +18,10 @@ public class DAOappartenir extends DAO{
         super();
     }
     
+    public void charger(){
+        
+    }
+    
     public void insert(Appartenir a) {
 
         try {

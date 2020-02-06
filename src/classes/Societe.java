@@ -52,10 +52,8 @@ public class Societe implements Comparable<Societe> {
 
     @Override
     public int compareTo(Societe cible) {
-        String ch1, ch2;
-        ch1 = this.getChamp();
-        ch2 = cible.getChamp();
-        return ch1.compareTo(ch2);
+        
+        return this.getChamp().compareTo(cible.getChamp());
     }
     
     

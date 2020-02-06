@@ -87,6 +87,54 @@ public class DAOediteur extends DAO{
         
     }
     
+    public List<Ouvrage> getOuvragesByID(Editeur e) {
+        List<Ouvrage> lesOuvrages = new ArrayList<>();
+
+        try {
+            String query = "select o.*, st.NOM_STATUT from ouvrage o, editeur edt, publier p, statut st where o.ISBN = p.ISBN and p.ID_EDITEUR = edt.ID_EDITEUR and o.ID_STATUT = st.ID_STATUT and edt.ID_EDITEUR = ?;";
+
+            PreparedStatement pstmt = this.getConnection().prepareStatement(query);
+            pstmt.setInt(1, e.getId_editeur());
+
+            ResultSet rs = pstmt.executeQuery(query);
+
+            while (rs.next()) {
+                Statut leStatut = new Statut(rs.getInt("ID_STATUT"), rs.getString("NOM_STATUT"));
+                Ouvrage lOuvrage = new Ouvrage(rs.getString("ISBN"), leStatut, rs.getString("TITRE"), rs.getString("IMAGE"), rs.getString("SOUS_TITRE"), rs.getString("RESUME"), rs.getFloat("STOCK"), rs.getFloat("TVA"), rs.getFloat("POIDS"), rs.getFloat("PRIX"), rs.getString("DIMENSIONS"), rs.getString("NOMBRE_PAGE"), rs.getString("COMMENTAIRE"));
+                lesOuvrages.add(lOuvrage);
+            }
+
+            rs.close();
+            pstmt.close();
+
+        } catch (SQLException ex) {
+            System.err.println("Oops:SQL:" + ex.getErrorCode() + "/" + ex.getMessage());
+        }
+
+        return lesOuvrages;
+    }
+    
+    public void Publier(Editeur e, Ouvrage o){
+        
+        try {
+            String query = "INSERT INTO Publier VALUES (?,?);";
+            PreparedStatement pstmt = this.getConnection().prepareStatement(query);
+            pstmt.setString(1, o.getIsbn());
+            pstmt.setInt(2, e.getId_editeur());
+            
+
+            int result = pstmt.executeUpdate();
+
+            System.out.println("resultat:" + result);
+
+            pstmt.close();
+
+        } catch (SQLException ex) {
+            System.err.println("Oops:SQL:" + ex.getErrorCode() + "/" + ex.getMessage());
+        }
+        
+    }
+    
     
     
 }

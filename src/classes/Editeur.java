@@ -1,11 +1,14 @@
 package classes;
 
+import java.util.List;
 
-public class Editeur {
-    private int id_editeur = 0;
+public class Editeur implements Comparable<Editeur> {
+
+    private int id_editeur;
     private String nom;
     private String email;
     private String telephone;
+    private List<Ouvrage> lesOuvrages;
 
     public Editeur() {
     }
@@ -55,15 +58,23 @@ public class Editeur {
         this.telephone = telephone;
     }
 
+    public List<Ouvrage> getLesOuvrages() {
+        return lesOuvrages;
+    }
+
+    public void setLesOuvrages(List<Ouvrage> lesOuvrages) {
+        this.lesOuvrages = lesOuvrages;
+    }
+  
     @Override
     public String toString() {
-        String s;
-        if(id_editeur>0){
-            s = super.toString()+ "Editeur{" + "id_editeur=" + id_editeur + ", nom=" + nom + ", email=" + email + ", telephone=" + telephone + '}';
-        }else {
-            s = super.toString()+ "Editeur{" + ", nom=" + nom + ", email=" + email + ", telephone=" + telephone + '}';
-        }
-        return s;
+        return "Editeur{" + "id_editeur=" + id_editeur + ", nom=" + nom + ", email=" + email + ", telephone=" + telephone + '}';
     }
-    
+
+    @Override
+    public int compareTo(Editeur cible) {
+
+        return this.getNom().compareTo(cible.getNom());
+    }
+
 }

@@ -80,4 +80,30 @@ public class DAOtheme extends DAO{
         }
     }
     
+    public List<Sous_theme> getSousThemeByID(Theme t) {
+        List<Sous_theme> lesSous_themes = new ArrayList<>();
+        try {
+            String query = "select st.*, t.LIBELLE as LIBELLE_THEME from sous_theme st, theme t where st.ID_THEME = t.ID_THEME and t.ID_THEME = ?;";
+
+            PreparedStatement pstmt = this.getConnection().prepareStatement(query);
+            pstmt.setInt(1, t.getId_theme());
+
+            ResultSet rs = pstmt.executeQuery(query);
+
+            while (rs.next()) {
+                Theme leTheme = new Theme(rs.getInt("ID_THEME"), rs.getString("LIBELLE_THEME"));
+                Sous_theme leSous_theme = new Sous_theme(rs.getInt("ID_SOUS_THEME"), leTheme, rs.getString("LIBELLE"));
+                lesSous_themes.add(leSous_theme);
+            }
+
+            rs.close();
+            pstmt.close();
+
+        } catch (SQLException ex) {
+            System.err.println("Oops:SQL:" + ex.getErrorCode() + "/" + ex.getMessage());
+        }
+
+        return lesSous_themes;
+    }
+    
 }

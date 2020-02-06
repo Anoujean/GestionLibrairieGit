@@ -1,6 +1,6 @@
 package classes;
 
-public class Paiement implements Comparable<Paiement>{
+public class Paiement implements Comparable<Paiement> {
 
     private int id_paiement;
     private Organisme_Paiement organisme_paiement;
@@ -64,26 +64,16 @@ public class Paiement implements Comparable<Paiement>{
         this.date = date;
     }
 
-   
     @Override
     public String toString() {
-        String s;
-        if (id_paiement == 0) {
-            s = "Paiement{" + ", numero_transaction=" + numero_transaction + ", date=" + date + '}';
-
-        } else {
-            s = "Paiement{" + "id_paiement=" + id_paiement + ", organisme_paiement=" + organisme_paiement + ", statut=" + statut + ", numero_transaction=" + numero_transaction + ", date=" + date + '}';
-
-        }
-        return s;
+        return "Paiement{" + "id_paiement=" + id_paiement + ", organisme_paiement=" + organisme_paiement + ", statut=" + statut + ", numero_transaction=" + numero_transaction + ", date=" + date + '}';
     }
 
+ 
     @Override
     public int compareTo(Paiement cible) {
-       String ch1, ch2;
-        ch1 = this.getNumero_transaction();
-        ch2 = cible.getNumero_transaction();
-        return ch1.compareTo(ch2);
+
+        return this.getNumero_transaction().compareTo(cible.getNumero_transaction());
     }
 
 }

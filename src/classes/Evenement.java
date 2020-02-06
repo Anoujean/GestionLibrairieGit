@@ -1,6 +1,6 @@
 package classes;
 
-public class Evenement implements Comparable<Evenement>{
+public class Evenement implements Comparable<Evenement> {
 
     private int id_evenement;
     private Statut statut;
@@ -13,6 +13,7 @@ public class Evenement implements Comparable<Evenement>{
     private String commentaire;
 
     public Evenement() {
+
     }
 
     public Evenement(int id_evenement, Statut statut, String libelle, String date_debut, String date_fin, String description, String image, float remise, String commentaire) {
@@ -27,8 +28,8 @@ public class Evenement implements Comparable<Evenement>{
         this.commentaire = commentaire;
     }
 
-    public Evenement(Statut statut, String libelle, String date_debut, String date_fin, String description, String image, float remise, String commentaire) {
-        this.statut = statut;
+    public Evenement(String libelle, String date_debut, String date_fin, String description, String image, float remise, String commentaire) {
+
         this.libelle = libelle;
         this.date_debut = date_debut;
         this.date_fin = date_fin;
@@ -38,8 +39,8 @@ public class Evenement implements Comparable<Evenement>{
         this.commentaire = commentaire;
     }
 
-    public Evenement(Statut statut, String libelle, String date_debut, String date_fin, String description, String image, float remise) {
-        this.statut = statut;
+    public Evenement(String libelle, String date_debut, String date_fin, String description, String image, float remise) {
+
         this.libelle = libelle;
         this.date_debut = date_debut;
         this.date_fin = date_fin;
@@ -120,26 +121,15 @@ public class Evenement implements Comparable<Evenement>{
         this.commentaire = commentaire;
     }
 
-   
     @Override
     public String toString() {
-        String s;
-        if (id_evenement == 0) {
-            s = "Evenement{" + ", libelle=" + libelle + ", date_debut=" + date_debut + ", date_fin=" + date_fin + ", description=" + description + ", image=" + image + ", remise=" + remise + ", commentaire=" + commentaire + '}';
-
-        } else {
-            s = "Evenement{" + "id_evenement=" + id_evenement + ", statut=" + statut + ", libelle=" + libelle + ", date_debut=" + date_debut + ", date_fin=" + date_fin + ", description=" + description + ", image=" + image + ", remise=" + remise + ", commentaire=" + commentaire + '}';
-
-        }
-        return s;
+        return "Evenement{" + "id_evenement=" + id_evenement + ", statut=" + statut + ", libelle=" + libelle + ", date_debut=" + date_debut + ", date_fin=" + date_fin + ", description=" + description + ", image=" + image + ", remise=" + remise + ", commentaire=" + commentaire + '}';
     }
 
     @Override
     public int compareTo(Evenement cible) {
-        String ch1, ch2;
-        ch1 = this.getLibelle();
-        ch2 = cible.getLibelle();
-        return ch1.compareTo(ch2);
+
+        return this.getLibelle().compareTo(cible.getLibelle());
     }
 
 }

@@ -1,15 +1,22 @@
 package classes;
 
-public class Mot_clef implements Comparable<Mot_clef>{
+import java.util.List;
+
+public class Mot_clef implements Comparable<Mot_clef> {
 
     private int id_mot_clef;
     private String libelle;
+    private List<Ouvrage> lesOuvrages;
 
     public Mot_clef() {
     }
 
     public Mot_clef(int id_mot_clef, String libelle) {
         this.id_mot_clef = id_mot_clef;
+        this.libelle = libelle;
+    }
+
+    public Mot_clef(String libelle) {
         this.libelle = libelle;
     }
 
@@ -29,25 +36,25 @@ public class Mot_clef implements Comparable<Mot_clef>{
         this.libelle = libelle;
     }
 
+    public List<Ouvrage> getLesOuvrages() {
+        return lesOuvrages;
+    }
+
+    public void setLesOuvrages(List<Ouvrage> lesOuvrages) {
+        this.lesOuvrages = lesOuvrages;
+    }
+    
+    
+
     @Override
     public String toString() {
-        String s;
-        if (id_mot_clef == 0) {
-            s = "Mot_clef{" + ", libelle=" + libelle + '}';
-
-        } else {
-            s = "Mot_clef{" + "id_mot_clef=" + id_mot_clef + ", libelle=" + libelle + '}';
-
-        }
-        return s;
+        return "Mot_clef{" + "id_mot_clef=" + id_mot_clef + ", libelle=" + libelle + '}';
     }
 
     @Override
     public int compareTo(Mot_clef cible) {
-        String ch1, ch2;
-        ch1 = this.getLibelle();
-        ch2 = cible.getLibelle();
-        return ch1.compareTo(ch2);
+
+        return this.getLibelle().compareTo(cible.getLibelle());
     }
 
 }

@@ -1,8 +1,9 @@
 package classes;
 
+import java.util.List;
 
 public class Organisme_Paiement implements Comparable<Organisme_Paiement> {
-    
+
     private int id_organisme_paiement;
     private String nom;
 
@@ -30,28 +31,17 @@ public class Organisme_Paiement implements Comparable<Organisme_Paiement> {
     public void setNom(String nom) {
         this.nom = nom;
     }
+  
 
-
-    
     @Override
     public String toString() {
-        String s;
-        if (id_organisme_paiement == 0) {
-            s = "Organisme_Paiement{" + "id_organisme_paiement=" + id_organisme_paiement + ", nom=" + nom + '}';
-
-        } else {
-            s = "Organisme_Paiement{" + "id_organisme_paiement=" + id_organisme_paiement + ", nom=" + nom + '}';
-
-        }
-        return s;
+        return "Organisme_Paiement{" + "id_organisme_paiement=" + id_organisme_paiement + ", nom=" + nom + '}';
     }
 
     @Override
     public int compareTo(Organisme_Paiement cible) {
-        String ch1, ch2;
-        ch1 = this.getNom();
-        ch2 = cible.getNom();
-        return ch1.compareTo(ch2);
+
+        return this.getNom().compareTo(cible.getNom());
     }
 
 }

@@ -1,13 +1,15 @@
-
 package classes;
 
+import java.util.List;
 
-public class Transporteur implements Comparable<Transporteur>{
-    private int id_transporteur = 0;
+public class Transporteur implements Comparable<Transporteur> {
+
+    private int id_transporteur;
     private Statut statut;
     private String libelle;
     private String tel;
     private String mail;
+    private List<Livraison> lesLivraisons;
 
     public Transporteur() {
     }
@@ -20,12 +22,13 @@ public class Transporteur implements Comparable<Transporteur>{
         this.mail = mail;
     }
 
-    public Transporteur(Statut statut, String libelle, String tel, String mail) {
-        this.statut = statut;
+    public Transporteur(String libelle, String tel, String mail) {
         this.libelle = libelle;
         this.tel = tel;
         this.mail = mail;
     }
+
+   
 
     public int getId_transporteur() {
         return id_transporteur;
@@ -67,28 +70,25 @@ public class Transporteur implements Comparable<Transporteur>{
         this.mail = mail;
     }
 
-    
+    public List<Livraison> getLesLivraisons() {
+        return lesLivraisons;
+    }
+
+    public void setLesLivraisons(List<Livraison> lesLivraisons) {
+        this.lesLivraisons = lesLivraisons;
+    }
 
     @Override
     public String toString() {
-        String s;
-        if(id_transporteur>0){
-             s= super.toString() + "Transporteur{" + "id_transporteur=" + id_transporteur + ", statut=" + statut + ", libelle=" + libelle + ", tel=" + tel + ", mail=" + mail + '}';
-        }else{
-             s= super.toString() + "Transporteur{" + ", statut=" + statut + ", libelle=" + libelle + ", tel=" + tel + ", mail=" + mail + '}';
-        }
-        return s;
-       
+        return "Transporteur{" + "id_transporteur=" + id_transporteur + ", statut=" + statut + ", libelle=" + libelle + ", tel=" + tel + ", mail=" + mail + '}';
     }
+
+    
 
     @Override
     public int compareTo(Transporteur cible) {
-        String ch1, ch2;
-        ch1 = this.getLibelle();
-        ch2 = cible.getLibelle();
-        return ch1.compareTo(ch2);
+
+        return this.getLibelle().compareTo(cible.getLibelle());
     }
-    
-    
-    
+
 }

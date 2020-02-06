@@ -1,19 +1,26 @@
 package classes;
 
+import java.util.List;
 
-public class Membre extends Personne{
-    private int id_membre = 0;
+
+public class Membre extends Personne {
+
+    private int id_membre;
     private Statut statut;
     private String telephone;
     private String email;
     private String password;
     private String adresse_ip;
     private String commentaire;
+    private List<Adresse> lesAdressesLivres;
+    private List<Adresse> lesAdressesFactures;
+    private List<Commande> lesCommandes;
+    private List<Commentaire> lesCommentaires;
 
     public Membre() {
     }
 
-    public Membre(int id_membre, Statut statut,String nom, String prenom, String date_de_naissance, String telephone, String email, String password, String adresse_ip, String commentaire) {
+    public Membre(int id_membre, Statut statut, String telephone, String email, String password, String adresse_ip, String commentaire, String nom, String prenom, String date_de_naissance) {
         super(nom, prenom, date_de_naissance);
         this.id_membre = id_membre;
         this.statut = statut;
@@ -24,9 +31,8 @@ public class Membre extends Personne{
         this.commentaire = commentaire;
     }
 
-    public Membre(Statut statut, String nom, String prenom, String date_de_naissance, String telephone, String email, String password, String adresse_ip, String commentaire) {
+    public Membre(String telephone, String email, String password, String adresse_ip, String commentaire, String nom, String prenom, String date_de_naissance) {
         super(nom, prenom, date_de_naissance);
-        this.statut = statut;
         this.telephone = telephone;
         this.email = email;
         this.password = password;
@@ -34,14 +40,15 @@ public class Membre extends Personne{
         this.commentaire = commentaire;
     }
 
-    public Membre(int id_statut,String nom, String prenom, String date_de_naissance, String telephone, String email, String password, String adresse_ip) {
+    public Membre(String telephone, String email, String password, String adresse_ip, String nom, String prenom, String date_de_naissance) {
         super(nom, prenom, date_de_naissance);
-        this.statut = statut;
         this.telephone = telephone;
         this.email = email;
         this.password = password;
         this.adresse_ip = adresse_ip;
     }
+
+  
 
     public int getId_membre() {
         return id_membre;
@@ -99,19 +106,45 @@ public class Membre extends Personne{
         this.commentaire = commentaire;
     }
 
-  
-    @Override
-    public String toString() {
-        
-        String s;
-        if(id_membre>0){
-           s = super.toString()+ "Membre{" + "id_membre=" + id_membre + ", statut=" + statut + ", telephone=" + telephone + ", email=" + email + ", password=" + password + ", adresse_ip=" + adresse_ip + ", commentaire=" + commentaire + '}'; 
-        }else{
-            return super.toString()+ "Membre{" + ", statut=" + statut + ", telephone=" + telephone + ", email=" + email + ", password=" + password + ", adresse_ip=" + adresse_ip + ", commentaire=" + commentaire + '}';
-        }
-        return s;
-        
+    public List<Adresse> getLesAdressesLivres() {
+        return lesAdressesLivres;
+    }
+
+    public void setLesAdressesLivres(List<Adresse> lesAdressesLivres) {
+        this.lesAdressesLivres = lesAdressesLivres;
+    }
+
+    public List<Adresse> getLesAdressesFactures() {
+        return lesAdressesFactures;
+    }
+
+    public void setLesAdressesFactures(List<Adresse> lesAdressesFactures) {
+        this.lesAdressesFactures = lesAdressesFactures;
+    }
+
+    public List<Commande> getLesCommandes() {
+        return lesCommandes;
+    }
+
+    public void setLesCommandes(List<Commande> lesCommandes) {
+        this.lesCommandes = lesCommandes;
+    }
+
+    public List<Commentaire> getLesCommentaires() {
+        return lesCommentaires;
+    }
+
+    public void setLesCommentaires(List<Commentaire> lesCommentaires) {
+        this.lesCommentaires = lesCommentaires;
     }
     
     
+
+    @Override
+    public String toString() {
+        return "Membre{" + "id_membre=" + id_membre + ", statut=" + statut + ", telephone=" + telephone + ", email=" + email + ", password=" + password + ", adresse_ip=" + adresse_ip + ", commentaire=" + commentaire + '}';
+    }
+
+    
+
 }

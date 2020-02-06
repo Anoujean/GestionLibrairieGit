@@ -100,5 +100,53 @@ public class DAOevenement extends DAO{
         
     }
     
+    public List<Ouvrage> getOuvragesByID(Evenement e) {
+        List<Ouvrage> lesOuvrages = new ArrayList<>();
+
+        try {
+            String query = "select o.*, sto.NOM_STATUT from ouvrage o, evenement evt, appartenir app, statut sto where o.ISBN = app.ISBN and app.ID_EVENEMENT = evt.ID_EVENEMENT and o.ID_STATUT = sto.ID_STATUT and evt.ID_EVENEMENT = ?;";
+
+            PreparedStatement pstmt = this.getConnection().prepareStatement(query);
+            pstmt.setInt(1, e.getId_evenement());
+
+            ResultSet rs = pstmt.executeQuery(query);
+
+            while (rs.next()) {
+                Statut leStatut = new Statut(rs.getInt("ID_STATUT"), rs.getString("NOM_STATUT"));
+                Ouvrage lOuvrage = new Ouvrage(rs.getString("ISBN"), leStatut, rs.getString("TITRE"), rs.getString("IMAGE"), rs.getString("SOUS_TITRE"), rs.getString("RESUME"), rs.getFloat("STOCK"), rs.getFloat("TVA"), rs.getFloat("POIDS"), rs.getFloat("PRIX"), rs.getString("DIMENSIONS"), rs.getString("NOMBRE_PAGE"), rs.getString("COMMENTAIRE"));
+                lesOuvrages.add(lOuvrage);
+            }
+
+            rs.close();
+            pstmt.close();
+
+        } catch (SQLException ex) {
+            System.err.println("Oops:SQL:" + ex.getErrorCode() + "/" + ex.getMessage());
+        }
+
+        return lesOuvrages;
+    }
+    
+    public void Appartenir(Evenement e, Ouvrage o){
+        
+        try {
+            String query = "INSERT INTO Appartenir VALUES (?,?);";
+            PreparedStatement pstmt = this.getConnection().prepareStatement(query);
+            pstmt.setString(1, o.getIsbn());
+            pstmt.setInt(2, e.getId_evenement());
+            
+
+            int result = pstmt.executeUpdate();
+
+            System.out.println("resultat:" + result);
+
+            pstmt.close();
+
+        } catch (SQLException ex) {
+            System.err.println("Oops:SQL:" + ex.getErrorCode() + "/" + ex.getMessage());
+        }
+        
+    }
+    
     
 }

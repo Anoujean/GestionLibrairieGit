@@ -1,6 +1,6 @@
 package classes;
 
-public class Commentaire {
+public class Commentaire implements Comparable<Commentaire> {
 
     private int id_commentaire;
     private Membre membre;
@@ -33,28 +33,20 @@ public class Commentaire {
         this.commentaire = commentaire;
     }
 
-    public Commentaire(Membre membre, Ligne_commande ligne_commande, Ouvrage ouvrage, Statut statut, Employe employe, String objet, String contenu, int note, String date, String adresse_ip, String commentaire) {
-        this.membre = membre;
-        this.ligne_commande = ligne_commande;
-        this.ouvrage = ouvrage;
-        this.statut = statut;
-        this.employe = employe;
+    public Commentaire(String objet, String contenu, int note, String date, String adresse_ip, String commentaire) {
         this.objet = objet;
         this.contenu = contenu;
         this.note = note;
+        this.date = date;
         this.adresse_ip = adresse_ip;
         this.commentaire = commentaire;
     }
 
-    public Commentaire(Membre membre, Ligne_commande ligne_commande, Ouvrage ouvrage, Statut statut, Employe employe, String objet, String contenu, int note, String date, String adresse_ip) {
-        this.membre = membre;
-        this.ligne_commande = ligne_commande;
-        this.ouvrage = ouvrage;
-        this.statut = statut;
-        this.employe = employe;
+    public Commentaire(String objet, String contenu, int note, String date, String adresse_ip) {
         this.objet = objet;
         this.contenu = contenu;
         this.note = note;
+        this.date = date;
         this.adresse_ip = adresse_ip;
     }
 
@@ -130,20 +122,20 @@ public class Commentaire {
         this.note = note;
     }
 
-    public String getAdresse_ip() {
-        return adresse_ip;
-    }
-
-    public void setAdresse_ip(String adresse_ip) {
-        this.adresse_ip = adresse_ip;
-    }
-    
     public String getDate() {
         return date;
     }
 
     public void setDate(String date) {
         this.date = date;
+    }
+
+    public String getAdresse_ip() {
+        return adresse_ip;
+    }
+
+    public void setAdresse_ip(String adresse_ip) {
+        this.adresse_ip = adresse_ip;
     }
 
     public String getCommentaire() {
@@ -153,18 +145,17 @@ public class Commentaire {
     public void setCommentaire(String commentaire) {
         this.commentaire = commentaire;
     }
-    
+
     @Override
     public String toString() {
-        String s;
-        if (id_commentaire == 0) {
-            s = "Commentaire{" + ", objet=" + objet + ", contenu=" + contenu + ", note=" + note + ", adresse_ip=" + adresse_ip + ", commentaire=" + commentaire + '}';
+        return "Commentaire{" + "id_commentaire=" + id_commentaire + ", membre=" + membre + ", ligne_commande=" + ligne_commande + ", ouvrage=" + ouvrage + ", statut=" + statut + ", employe=" + employe + ", objet=" + objet + ", contenu=" + contenu + ", note=" + note + ", date=" + date + ", adresse_ip=" + adresse_ip + ", commentaire=" + commentaire + '}';
+    }
 
-        } else {
-            s = "Commentaire{" + "id_commentaire=" + id_commentaire + ", membre=" + membre + ", ligne_commande=" + ligne_commande + ", ouvrage=" + ouvrage + ", statut=" + statut + ", employe=" + employe + ", objet=" + objet + ", contenu=" + contenu + ", note=" + note + ", adresse_ip=" + adresse_ip + ", commentaire=" + commentaire + '}';
+  
 
-        }
-        return s;
+    @Override
+    public int compareTo(Commentaire cible) {
+        return this.getNote() - cible.getNote();
     }
 
 }

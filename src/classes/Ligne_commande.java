@@ -1,14 +1,17 @@
 package classes;
 
+import java.util.List;
+
 public class Ligne_commande {
 
-    private int id_ligne_commande = 0;
+    private int id_ligne_commande;
     private Ouvrage ouvrage;
     private Commande commande;
     private int qte;
     private float prix;
     private float tva;
     private float remise;
+    private List<Commentaire> lesCommentaires;
 
     public Ligne_commande() {
     }
@@ -23,13 +26,13 @@ public class Ligne_commande {
         this.remise = remise;
     }
 
-    public Ligne_commande(Commande commande, int qte, float prix, float tva, float remise) {
-        this.commande = commande;
+    public Ligne_commande(int qte, float prix, float tva, float remise) {
         this.qte = qte;
         this.prix = prix;
         this.tva = tva;
         this.remise = remise;
     }
+
 
     public int getId_ligne_commande() {
         return id_ligne_commande;
@@ -87,18 +90,19 @@ public class Ligne_commande {
         this.remise = remise;
     }
 
-   
-    @Override
-    public String toString() {
-        String s;
-        if (id_ligne_commande == 0) {
-            s = "Ligne_commande{" + ", qte=" + qte + ", prix=" + prix + ", tva=" + tva + ", remise=" + remise + '}';
-
-        } else {
-            s = "Ligne_commande{" + "id_ligne_commande=" + id_ligne_commande + ", ouvrage=" + ouvrage + ", commande=" + commande + ", qte=" + qte + ", prix=" + prix + ", tva=" + tva + ", remise=" + remise + '}';
-
-        }
-        return s;
+    public List<Commentaire> getLesCommentaires() {
+        return lesCommentaires;
     }
 
+    public void setLesCommentaires(List<Commentaire> lesCommentaires) {
+        this.lesCommentaires = lesCommentaires;
+    }
+
+    @Override
+    public String toString() {
+        return "Ligne_commande{" + "id_ligne_commande=" + id_ligne_commande + ", ouvrage=" + ouvrage + ", commande=" + commande + ", qte=" + qte + ", prix=" + prix + ", tva=" + tva + ", remise=" + remise + '}';
+    }
+
+   
+    
 }

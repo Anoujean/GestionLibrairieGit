@@ -1,9 +1,14 @@
 package classes;
 
-public class Theme implements Comparable<Theme>{
+import java.util.List;
+
+public class Theme implements Comparable<Theme> {
 
     private int id_theme;
     private String libelle;
+    private List<Sous_theme> leSous_themes;
+
+    
 
     public Theme() {
     }
@@ -32,26 +37,24 @@ public class Theme implements Comparable<Theme>{
     public void setLibelle(String libelle) {
         this.libelle = libelle;
     }
+    
+    public List<Sous_theme> getLeSous_themes() {
+        return leSous_themes;
+    }
+
+    public void setLeSous_themes(List<Sous_theme> leSous_themes) {
+        this.leSous_themes = leSous_themes;
+    }
 
     @Override
     public String toString() {
-        String s;
-        if (id_theme == 0) {
-            s = "Theme{" + ", libelle=" + libelle + '}';
-
-        } else {
-            s = "Theme{" + "id_theme=" + id_theme + ", libelle=" + libelle + '}';
-
-        }
-        return s;
+        return "Theme{" + "id_theme=" + id_theme + ", libelle=" + libelle + '}';
     }
 
     @Override
     public int compareTo(Theme cible) {
-        String ch1, ch2;
-        ch1 = this.getLibelle();
-        ch2 = cible.getLibelle();
-        return ch1.compareTo(ch2);
+
+        return this.getLibelle().compareTo(cible.getLibelle());
     }
 
 }

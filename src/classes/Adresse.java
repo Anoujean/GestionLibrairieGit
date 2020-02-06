@@ -1,5 +1,7 @@
 package classes;
 
+import java.util.List;
+
 public class Adresse implements Comparable<Adresse> {
 
     private int id_adresse;
@@ -7,8 +9,14 @@ public class Adresse implements Comparable<Adresse> {
     private String code_postal;
     private String ville;
     private String pays;
+    private List<Membre> membresLivres;
+    private List<Membre> membresFactures;
+    private List<Commande> commandesLivres;
+    private List<Commande> commandesFactures;
+    
 
     public Adresse() {
+
     }
 
     public Adresse(int id_adresse, String rue, String code_postal, String ville, String pays) {
@@ -20,6 +28,7 @@ public class Adresse implements Comparable<Adresse> {
     }
 
     public Adresse(String rue, String code_postal, String ville, String pays) {
+
         this.rue = rue;
         this.code_postal = code_postal;
         this.ville = ville;
@@ -66,27 +75,49 @@ public class Adresse implements Comparable<Adresse> {
         this.pays = pays;
     }
 
+    public List<Membre> getMembresLivres() {
+        return membresLivres;
+    }
+
+    public void setMembresLivres(List<Membre> membresLivres) {
+        this.membresLivres = membresLivres;
+    }
+
+    public List<Membre> getMembresFactures() {
+        return membresFactures;
+    }
+
+    public void setMembresFactures(List<Membre> membresFactures) {
+        this.membresFactures = membresFactures;
+    }
+
+    public List<Commande> getCommandesLivres() {
+        return commandesLivres;
+    }
+
+    public void setCommandesLivres(List<Commande> commandesLivres) {
+        this.commandesLivres = commandesLivres;
+    }
+
+    public List<Commande> getCommandesFactures() {
+        return commandesFactures;
+    }
+
+    public void setCommandesFactures(List<Commande> commandesFactures) {
+        this.commandesFactures = commandesFactures;
+    }
+    
+    
+
     @Override
     public String toString() {
-        String s;
-        if (id_adresse == 0) {
-            s = "Adresse{" + ", rue=" + rue + ", code_postal=" + code_postal + ", ville=" + ville + ", pays=" + pays + '}';
-
-        } else {
-            s = "Adresse{" + "id_adresse=" + id_adresse + ", rue=" + rue + ", code_postal=" + code_postal + ", ville=" + ville + ", pays=" + pays + '}';
-
-        }
-        return s;
+        return "Adresse{" + "id_adresse=" + id_adresse + ", rue=" + rue + ", code_postal=" + code_postal + ", ville=" + ville + ", pays=" + pays + '}';
     }
 
     @Override
     public int compareTo(Adresse cible) {
-        String ch1, ch2;
-        ch1 = this.getVille();
-        ch2 = cible.getVille();
-        return ch1.compareTo(ch2);
+
+        return this.getVille().compareTo(cible.getVille());
     }
 
-    
-    
 }

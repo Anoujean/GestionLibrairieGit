@@ -7,16 +7,24 @@ public class Livraison {
     private Commande commande;
     private String date_motif;
     private String motif;
+    private String commentaire;
 
     public Livraison() {
     }
 
-    public Livraison(int id_livraison, Transporteur transporteur, Commande commande, String date_motif, String motif) {
+    public Livraison(int id_livraison, Transporteur transporteur, Commande commande, String date_motif, String motif, String commentaire) {
         this.id_livraison = id_livraison;
         this.transporteur = transporteur;
         this.commande = commande;
         this.date_motif = date_motif;
         this.motif = motif;
+        this.commentaire = commentaire;
+    }
+
+    public Livraison(String date_motif, String motif, String commentaire) {
+        this.date_motif = date_motif;
+        this.motif = motif;
+        this.commentaire = commentaire;
     }
 
     public Livraison(String date_motif, String motif) {
@@ -64,18 +72,18 @@ public class Livraison {
         this.motif = motif;
     }
 
+    public String getCommentaire() {
+        return commentaire;
+    }
+
+    public void setCommentaire(String commentaire) {
+        this.commentaire = commentaire;
+    }
 
     @Override
     public String toString() {
-        String s;
-        if (id_livraison == 0) {
-            s = "Livraison{" + ", date_motif=" + date_motif + ", motif=" + motif + '}';
-
-        } else {
-            s = "Livraison{" + "id_livraison=" + id_livraison + ", transporteur=" + transporteur + ", commande=" + commande + ", date_motif=" + date_motif + ", motif=" + motif + '}';
-
-        }
-        return s;
+        return "Livraison{" + "id_livraison=" + id_livraison + ", transporteur=" + transporteur + ", commande=" + commande + ", date_motif=" + date_motif + ", motif=" + motif + ", commentaire=" + commentaire + '}';
     }
 
+   
 }

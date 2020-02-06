@@ -1,8 +1,8 @@
 package classes;
 
-
 public class Statut {
-    private int id_statut = 0;
+
+    private int id_statut;
     private String nom_statut;
 
     public Statut() {
@@ -35,17 +35,12 @@ public class Statut {
 
     @Override
     public String toString() {
-        String s;
-        if(id_statut>0){
-            s= "Statut{" + "id_statut=" + id_statut + ", nom_statut=" + nom_statut + '}';
-        }else{
-            s= "Statut{" + ", nom_statut=" + nom_statut + '}';
-        }
-        return s;
-        
+        return "Statut{" + "id_statut=" + id_statut + ", nom_statut=" + nom_statut + '}';
     }
+
+ 
+  
+ 
     
-    
-    
-    
+
 }

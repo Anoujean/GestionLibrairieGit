@@ -1,18 +1,18 @@
 package classes;
 
+public class Personne implements Comparable<Personne> {
 
-public class Personne {
     private String nom;
     private String prenom;
     private String date_de_naissance;
+
+    public Personne() {
+    }
 
     public Personne(String nom, String prenom, String date_de_naissance) {
         this.nom = nom;
         this.prenom = prenom;
         this.date_de_naissance = date_de_naissance;
-    }
-
-    public Personne() {
     }
 
     public String getNom() {
@@ -43,7 +43,11 @@ public class Personne {
     public String toString() {
         return "Personne{" + "nom=" + nom + ", prenom=" + prenom + ", date_de_naissance=" + date_de_naissance + '}';
     }
-    
-    
-    
+
+    @Override
+    public int compareTo(Personne cible) {
+
+        return this.getNom().compareTo(cible.getNom());
+    }
+
 }

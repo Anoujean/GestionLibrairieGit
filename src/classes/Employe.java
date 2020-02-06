@@ -1,21 +1,18 @@
-
 package classes;
 
+import java.util.List;
 
 public class Employe extends Personne {
-    private int id_employe = 0;
+
+    private int id_employe;
     private String login;
     private String password;
-
-    
+    private List<Ouvrage> lesOuvrages;
+    private List<Commentaire> lesCommentaires;
+    private List<Commande> lesCommandes;
 
     public Employe() {
-    }
-    
-    public Employe(String nom, String prenom, String date_de_naissance, String login, String password) {
-        super(nom, prenom, date_de_naissance);
-        this.login = login;
-        this.password = password;
+        super();
     }
 
     public Employe(int id_employe, String nom, String prenom, String date_de_naissance, String login, String password) {
@@ -24,8 +21,12 @@ public class Employe extends Personne {
         this.login = login;
         this.password = password;
     }
-    
-    
+
+    public Employe(String nom, String prenom, String date_de_naissance, String login, String password) {
+        super(nom, prenom, date_de_naissance);
+        this.login = login;
+        this.password = password;
+    }
 
     public String getLogin() {
         return login;
@@ -51,17 +52,33 @@ public class Employe extends Personne {
         this.id_employe = id_employe;
     }
 
-    @Override
-    public String toString() {
-        String s;
-        if (id_employe>0){
-            s= super.toString()+ "Employe{" + "id_employe=" + id_employe + ", login=" + login + ", password=" + password + '}';
-        }else{
-             s= super.toString()+ "Employe{" + ", login=" + login + ", password=" + password + '}';
-        }
-        return s;
-        
+    public List<Ouvrage> getLesOuvrages() {
+        return lesOuvrages;
+    }
+
+    public void setLesOuvrages(List<Ouvrage> lesOuvrages) {
+        this.lesOuvrages = lesOuvrages;
+    }
+
+    public List<Commentaire> getLesCommentaires() {
+        return lesCommentaires;
+    }
+
+    public void setLesCommentaires(List<Commentaire> lesCommentaires) {
+        this.lesCommentaires = lesCommentaires;
+    }
+
+    public List<Commande> getLesCommandes() {
+        return lesCommandes;
+    }
+
+    public void setLesCommandes(List<Commande> lesCommandes) {
+        this.lesCommandes = lesCommandes;
     }
     
-    
+    @Override
+    public String toString() {
+        return super.toString()+ "Employe{" + "id_employe=" + id_employe + ", login=" + login + ", password=" + password + '}';
+    }
+
 }

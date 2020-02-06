@@ -1,8 +1,11 @@
 package classes;
 
+import java.util.List;
+
 public class Auteur extends Personne{
     private int id_auteur = 0;
     private String date_de_deces;
+    private List<Ouvrage> lesOuvrages;
 
     public Auteur() {
     }
@@ -33,6 +36,16 @@ public class Auteur extends Personne{
     public void setDate_de_deces(String date_de_deces) {
         this.date_de_deces = date_de_deces;
     }
+
+    public List<Ouvrage> getLesOuvrages() {
+        return lesOuvrages;
+    }
+
+    public void setLesOuvrages(List<Ouvrage> lesOuvrages) {
+        this.lesOuvrages = lesOuvrages;
+    }
+    
+    
 
     @Override
     public String toString() {

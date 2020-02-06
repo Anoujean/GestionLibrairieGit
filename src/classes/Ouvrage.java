@@ -1,9 +1,10 @@
 package classes;
 
-public class Ouvrage implements Comparable<Ouvrage>{
+import java.util.List;
+
+public class Ouvrage implements Comparable<Ouvrage> {
 
     private String isbn;
-    private Sous_theme sous_theme ;
     private Statut statut;
     private String titre;
     private String image;
@@ -11,14 +12,22 @@ public class Ouvrage implements Comparable<Ouvrage>{
     private String resume;
     private float stock;
     private float tva;
+    private float poids;
+    private float prix;
+    private String dimensions;
+    private String nombre_page;
     private String commentaire;
+    private List<Commentaire> lesCommentaires;
+    private List<Evenement> lesEvenements;
+    private List<Mot_clef> lesMot_clefs;
+    private List<Sous_theme> lesSous_themes;
+    private List<Auteur> lesAuteurs;
 
     public Ouvrage() {
     }
 
-    public Ouvrage(String isbn, Sous_theme sous_theme, Statut statut, String titre, String image, String sous_titre, String resume, float stock, float tva, String commentaire) {
+    public Ouvrage(String isbn, Statut statut, String titre, String image, String sous_titre, String resume, float stock, float tva, float poids, float prix, String dimensions, String nombre_page, String commentaire) {
         this.isbn = isbn;
-        this.sous_theme = sous_theme;
         this.statut = statut;
         this.titre = titre;
         this.image = image;
@@ -26,42 +35,48 @@ public class Ouvrage implements Comparable<Ouvrage>{
         this.resume = resume;
         this.stock = stock;
         this.tva = tva;
+        this.poids = poids;
+        this.prix = prix;
+        this.dimensions = dimensions;
+        this.nombre_page = nombre_page;
         this.commentaire = commentaire;
     }
 
-    public Ouvrage(String titre, String image, String sous_titre, String resume, float stock, float tva, String commentaire) {
+    public Ouvrage(Statut statut, String titre, String image, String sous_titre, String resume, float stock, float tva, float poids, float prix, String dimensions, String nombre_page, String commentaire) {
+        this.statut = statut;
         this.titre = titre;
         this.image = image;
         this.sous_titre = sous_titre;
         this.resume = resume;
         this.stock = stock;
         this.tva = tva;
+        this.poids = poids;
+        this.prix = prix;
+        this.dimensions = dimensions;
+        this.nombre_page = nombre_page;
         this.commentaire = commentaire;
     }
 
-    public Ouvrage(String titre, String image, String sous_titre, String resume, float stock, float tva) {
+    public Ouvrage(Statut statut, String titre, String image, String sous_titre, String resume, float stock, float tva, float poids, float prix, String dimensions, String nombre_page) {
+        this.statut = statut;
         this.titre = titre;
         this.image = image;
         this.sous_titre = sous_titre;
         this.resume = resume;
         this.stock = stock;
         this.tva = tva;
+        this.poids = poids;
+        this.prix = prix;
+        this.dimensions = dimensions;
+        this.nombre_page = nombre_page;
     }
-
+    
     public String getIsbn() {
         return isbn;
     }
 
     public void setIsbn(String isbn) {
         this.isbn = isbn;
-    }
-
-    public Sous_theme getSous_theme() {
-        return sous_theme;
-    }
-
-    public void setSous_theme(Sous_theme sous_theme) {
-        this.sous_theme = sous_theme;
     }
 
     public Statut getStatut() {
@@ -120,6 +135,38 @@ public class Ouvrage implements Comparable<Ouvrage>{
         this.tva = tva;
     }
 
+    public float getPoids() {
+        return poids;
+    }
+
+    public void setPoids(float poids) {
+        this.poids = poids;
+    }
+
+    public float getPrix() {
+        return prix;
+    }
+
+    public void setPrix(float prix) {
+        this.prix = prix;
+    }
+
+    public String getDimensions() {
+        return dimensions;
+    }
+
+    public void setDimensions(String dimensions) {
+        this.dimensions = dimensions;
+    }
+
+    public String getNombre_page() {
+        return nombre_page;
+    }
+
+    public void setNombre_page(String nombre_page) {
+        this.nombre_page = nombre_page;
+    }
+    
     public String getCommentaire() {
         return commentaire;
     }
@@ -128,26 +175,55 @@ public class Ouvrage implements Comparable<Ouvrage>{
         this.commentaire = commentaire;
     }
 
+    public List<Commentaire> getLesCommentaires() {
+        return lesCommentaires;
+    }
+
+    public void setLesCommentaires(List<Commentaire> lesCommentaires) {
+        this.lesCommentaires = lesCommentaires;
+    }
+
+    public List<Evenement> getLesEvenements() {
+        return lesEvenements;
+    }
+
+    public void setLesEvenements(List<Evenement> lesEvenements) {
+        this.lesEvenements = lesEvenements;
+    }
+
+    public List<Mot_clef> getLesMot_clefs() {
+        return lesMot_clefs;
+    }
+
+    public void setLesMot_clefs(List<Mot_clef> lesMot_clefs) {
+        this.lesMot_clefs = lesMot_clefs;
+    }
+
+    public List<Sous_theme> getLesSous_themes() {
+        return lesSous_themes;
+    }
+
+    public void setLesSous_themes(List<Sous_theme> lesSous_themes) {
+        this.lesSous_themes = lesSous_themes;
+    }
+
+    public List<Auteur> getLesAuteurs() {
+        return lesAuteurs;
+    }
+
+    public void setLesAuteurs(List<Auteur> lesAuteurs) {
+        this.lesAuteurs = lesAuteurs;
+    }
     
     @Override
     public String toString() {
-        String s;
-        if (isbn == "") {
-            s = "Ouvrage{" + ", titre=" + titre + ", image=" + image + ", sous_titre=" + sous_titre + ", resume=" + resume + ", stock=" + stock + ", tva=" + tva + ", commentaire=" + commentaire + '}';
-
-        } else {
-            s = "Ouvrage{" + "isbn=" + isbn + ", sous_theme=" + sous_theme + ", statut=" + statut + ", titre=" + titre + ", image=" + image + ", sous_titre=" + sous_titre + ", resume=" + resume + ", stock=" + stock + ", tva=" + tva + ", commentaire=" + commentaire + '}';
-
-        }
-        return s;
+        return "Ouvrage{" + "isbn=" + isbn + ", statut=" + statut + ", titre=" + titre + ", image=" + image + ", sous_titre=" + sous_titre + ", resume=" + resume + ", stock=" + stock + ", tva=" + tva + ", commentaire=" + commentaire + '}';
     }
 
     @Override
     public int compareTo(Ouvrage cible) {
-        String ch1, ch2;
-        ch1 = this.getTitre();
-        ch2 = cible.getTitre();
-        return ch1.compareTo(ch2);
+
+        return this.getTitre().compareTo(cible.getTitre());
     }
 
 }

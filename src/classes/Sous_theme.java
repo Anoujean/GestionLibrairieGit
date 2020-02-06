@@ -43,27 +43,15 @@ public class Sous_theme implements Comparable<Sous_theme> {
         this.libelle = libelle;
     }
 
-    
-
     @Override
     public String toString() {
-        String s;
-        if (id_sous_theme == 0) {
-            s = "Sous_theme{" + ", libelle=" + libelle + '}';
-
-        } else {
-            s = "Sous_theme{" + "id_sous_theme=" + id_sous_theme + ", theme=" + theme + ", libelle=" + libelle + '}';
-
-        }
-        return s;
+        return "Sous_theme{" + "id_sous_theme=" + id_sous_theme + ", theme=" + theme + ", libelle=" + libelle + '}';
     }
 
     @Override
     public int compareTo(Sous_theme cible) {
-       String ch1, ch2;
-        ch1 = this.getLibelle();
-        ch2 = cible.getLibelle();
-        return ch1.compareTo(ch2);
+
+        return this.getLibelle().compareTo(cible.getLibelle());
     }
 
 }

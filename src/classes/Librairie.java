@@ -1,27 +1,27 @@
 package classes;
 
-import java.util.ArrayList;
+import java.util.*;
 
 
 public class Librairie {
-    private ArrayList <Membre> lesMembres;
-    private ArrayList <Auteur> lesAuteurs;
-    private ArrayList <Editeur> lesEditeurs;
-    private ArrayList <Employe> lesEmployes;
-    private ArrayList <Statut> lesStatus;
-    private ArrayList <Transporteur> lesTransporteurs;
-    private ArrayList <Commande> lesCommandes;
-    private ArrayList <Commentaire> lesCommentaires;
-    private ArrayList <Evenement> lesEvenements;
-    private ArrayList <Ligne_commande> lesLigne_commandes;
-    private ArrayList <Mot_clef> lesMot_clefs;
-    private ArrayList <Ouvrage> lesOuvrages;
-    private ArrayList <Sous_theme> lesSous_themes;
-    private ArrayList <Theme> lesThemes;
-    private ArrayList <Adresse> lesAdresses;
-    private ArrayList <Livraison> lesLivraisons;
-    private ArrayList <Organisme_Paiement> lesOrganisme_Paiements;
-    private ArrayList <Paiement> lesPaiements;
+    private List <Membre> lesMembres;
+    private List <Auteur> lesAuteurs;
+    private List <Editeur> lesEditeurs;
+    private List <Employe> lesEmployes;
+    private List <Statut> lesStatus;
+    private List <Transporteur> lesTransporteurs;
+    private List <Commande> lesCommandes;
+    private List <Commentaire> lesCommentaires;
+    private List <Evenement> lesEvenements;
+    private List <Ligne_commande> lesLigne_commandes;
+    private List <Mot_clef> lesMot_clefs;
+    private List <Ouvrage> lesOuvrages;
+    private List <Sous_theme> lesSous_themes;
+    private List <Theme> lesThemes;
+    private List <Adresse> lesAdresses;
+    private List <Livraison> lesLivraisons;
+    private List <Organisme_Paiement> lesOrganisme_Paiements;
+    private List <Paiement> lesPaiements;
     
     
     public Librairie() {
@@ -29,147 +29,147 @@ public class Librairie {
     
    /* GETTERS AND SETTERS*/
     
-    public ArrayList<Membre> getLesMembres() {
+    public List<Membre> getLesMembres() {
         return lesMembres;
     }
 
-    public void setLesMembres(ArrayList<Membre> lesMembres) {
+    public void setLesMembres(List<Membre> lesMembres) {
         this.lesMembres = lesMembres;
     }
 
-    public ArrayList<Auteur> getLesAuteurs() {
+    public List<Auteur> getLesAuteurs() {
         return lesAuteurs;
     }
 
-    public void setLesAuteurs(ArrayList<Auteur> lesAuteurs) {
+    public void setLesAuteurs(List<Auteur> lesAuteurs) {
         this.lesAuteurs = lesAuteurs;
     }
 
-    public ArrayList<Editeur> getLesEditeurs() {
+    public List<Editeur> getLesEditeurs() {
         return lesEditeurs;
     }
 
-    public void setLesEditeurs(ArrayList<Editeur> lesEditeurs) {
+    public void setLesEditeurs(List<Editeur> lesEditeurs) {
         this.lesEditeurs = lesEditeurs;
     }
 
-    public ArrayList<Employe> getLesEmployes() {
+    public List<Employe> getLesEmployes() {
         return lesEmployes;
     }
 
-    public void setLesEmployes(ArrayList<Employe> lesEmployes) {
+    public void setLesEmployes(List<Employe> lesEmployes) {
         this.lesEmployes = lesEmployes;
     }
 
-    public ArrayList<Statut> getLesStatus() {
+    public List<Statut> getLesStatus() {
         return lesStatus;
     }
 
-    public void setLesStatus(ArrayList<Statut> lesStatus) {
+    public void setLesStatus(List<Statut> lesStatus) {
         this.lesStatus = lesStatus;
     }
 
-    public ArrayList<Transporteur> getLesTransporteurs() {
+    public List<Transporteur> getLesTransporteurs() {
         return lesTransporteurs;
     }
 
-    public void setLesTransporteurs(ArrayList<Transporteur> lesTransporteurs) {
+    public void setLesTransporteurs(List<Transporteur> lesTransporteurs) {
         this.lesTransporteurs = lesTransporteurs;
     }
 
-    public ArrayList<Commande> getLesCommandes() {
+    public List<Commande> getLesCommandes() {
         return lesCommandes;
     }
 
-    public void setLesCommandes(ArrayList<Commande> lesCommandes) {
+    public void setLesCommandes(List<Commande> lesCommandes) {
         this.lesCommandes = lesCommandes;
     }
 
-    public ArrayList<Commentaire> getLesCommentaires() {
+    public List<Commentaire> getLesCommentaires() {
         return lesCommentaires;
     }
 
-    public void setLesCommentaires(ArrayList<Commentaire> lesCommentaires) {
+    public void setLesCommentaires(List<Commentaire> lesCommentaires) {
         this.lesCommentaires = lesCommentaires;
     }
 
-    public ArrayList<Evenement> getLesEvenements() {
+    public List<Evenement> getLesEvenements() {
         return lesEvenements;
     }
 
-    public void setLesEvenements(ArrayList<Evenement> lesEvenements) {
+    public void setLesEvenements(List<Evenement> lesEvenements) {
         this.lesEvenements = lesEvenements;
     }
 
-    public ArrayList<Ligne_commande> getLesLigne_commandes() {
+    public List<Ligne_commande> getLesLigne_commandes() {
         return lesLigne_commandes;
     }
 
-    public void setLesLigne_commandes(ArrayList<Ligne_commande> lesLigne_commandes) {
+    public void setLesLigne_commandes(List<Ligne_commande> lesLigne_commandes) {
         this.lesLigne_commandes = lesLigne_commandes;
     }
 
-    public ArrayList<Mot_clef> getLesMot_clefs() {
+    public List<Mot_clef> getLesMot_clefs() {
         return lesMot_clefs;
     }
 
-    public void setLesMot_clefs(ArrayList<Mot_clef> lesMot_clefs) {
+    public void setLesMot_clefs(List<Mot_clef> lesMot_clefs) {
         this.lesMot_clefs = lesMot_clefs;
     }
 
-    public ArrayList<Ouvrage> getLesOuvrages() {
+    public List<Ouvrage> getLesOuvrages() {
         return lesOuvrages;
     }
 
-    public void setLesOuvrages(ArrayList<Ouvrage> lesOuvrages) {
+    public void setLesOuvrages(List<Ouvrage> lesOuvrages) {
         this.lesOuvrages = lesOuvrages;
     }
 
-    public ArrayList<Sous_theme> getLesSous_themes() {
+    public List<Sous_theme> getLesSous_themes() {
         return lesSous_themes;
     }
 
-    public void setLesSous_themes(ArrayList<Sous_theme> lesSous_themes) {
+    public void setLesSous_themes(List<Sous_theme> lesSous_themes) {
         this.lesSous_themes = lesSous_themes;
     }
 
-    public ArrayList<Theme> getLesThemes() {
+    public List<Theme> getLesThemes() {
         return lesThemes;
     }
 
-    public void setLesThemes(ArrayList<Theme> lesThemes) {
+    public void setLesThemes(List<Theme> lesThemes) {
         this.lesThemes = lesThemes;
     }
 
-    public ArrayList<Adresse> getLesAdresses() {
+    public List<Adresse> getLesAdresses() {
         return lesAdresses;
     }
 
-    public void setLesAdresses(ArrayList<Adresse> lesAdresses) {
+    public void setLesAdresses(List<Adresse> lesAdresses) {
         this.lesAdresses = lesAdresses;
     }
 
-    public ArrayList<Livraison> getLesLivraisons() {
+    public List<Livraison> getLesLivraisons() {
         return lesLivraisons;
     }
 
-    public void setLesLivraisons(ArrayList<Livraison> lesLivraisons) {
+    public void setLesLivraisons(List<Livraison> lesLivraisons) {
         this.lesLivraisons = lesLivraisons;
     }
 
-    public ArrayList<Organisme_Paiement> getLesOrganisme_Paiements() {
+    public List<Organisme_Paiement> getLesOrganisme_Paiements() {
         return lesOrganisme_Paiements;
     }
 
-    public void setLesOrganisme_Paiements(ArrayList<Organisme_Paiement> lesOrganisme_Paiements) {
+    public void setLesOrganisme_Paiements(List<Organisme_Paiement> lesOrganisme_Paiements) {
         this.lesOrganisme_Paiements = lesOrganisme_Paiements;
     }
 
-    public ArrayList<Paiement> getLesPaiements() {
+    public List<Paiement> getLesPaiements() {
         return lesPaiements;
     }
 
-    public void setLesPaiements(ArrayList<Paiement> lesPaiements) {
+    public void setLesPaiements(List<Paiement> lesPaiements) {
         this.lesPaiements = lesPaiements;
     }
 
@@ -259,7 +259,6 @@ public class Librairie {
         this.lesAdresses.add(adresse);
     }
 
-    
     public void SupprimerAuteur (Auteur auteur){
         this.lesAuteurs.remove(auteur);
     }
@@ -271,8 +270,6 @@ public class Librairie {
     public void SupprimerCommentaire (Commentaire commentaire){
         this.lesCommentaires.remove(commentaire);
     }
-    
-
     
     public void SupprimerEditeur (Editeur editeur){
         this.lesEditeurs.remove(editeur);
@@ -313,8 +310,6 @@ public class Librairie {
     public void SupprimerPaiement (Paiement paiement){
         this.lesPaiements.remove(paiement);
     } 
-     
-
      
     public void SupprimerSous_theme(Sous_theme sous_theme){
         this.lesSous_themes.remove(sous_theme);

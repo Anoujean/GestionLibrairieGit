@@ -100,6 +100,15 @@ public class DAOevenement extends DAO{
         
     }
     
+    public void delete(Evenement e){
+        try {
+            Statement stm = this.getConnection().createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            stm.executeUpdate("DELETE FROM Evenement where id_evenement = " + e.getId_evenement());
+        } catch (SQLException ex) {
+            System.err.println("Oops:SQL:" + ex.getErrorCode() + "/" + ex.getMessage());
+        }
+    }
+    
     public List<Ouvrage> getOuvragesByID(Evenement e) {
         List<Ouvrage> lesOuvrages = new ArrayList<>();
 
@@ -146,6 +155,37 @@ public class DAOevenement extends DAO{
             System.err.println("Oops:SQL:" + ex.getErrorCode() + "/" + ex.getMessage());
         }
         
+    }
+    
+    public void deleteAppartenir(Ouvrage o){
+        try {
+            Statement stm = this.getConnection().createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            stm.executeUpdate("DELETE FROM Appartenir where ISBN = " + o.getIsbn());
+        } catch (SQLException ex) {
+            System.err.println("Oops:SQL:" + ex.getErrorCode() + "/" + ex.getMessage());
+        }
+    }
+    
+    public void deleteAppartenir(Evenement e){
+        try {
+            Statement stm = this.getConnection().createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            stm.executeUpdate("DELETE FROM Appartenir where id_evenement = " + e.getId_evenement());
+        } catch (SQLException ex) {
+            System.err.println("Oops:SQL:" + ex.getErrorCode() + "/" + ex.getMessage());
+        }
+    }
+    
+    public void deleteAppartenir(Ouvrage o, Evenement e){
+        try {
+            String query = "DELETE FROM Evenement WHERE id_evenement = ? AND ISBN = ?";
+            PreparedStatement pstmt = this.getConnection().prepareStatement(query);
+            pstmt.setInt(1, e.getId_evenement());
+            pstmt.setString(2, o.getIsbn());
+            int result = pstmt.executeUpdate();
+            
+        } catch (SQLException ex) {
+            System.err.println("Oops:SQL:" + ex.getErrorCode() + "/" + ex.getMessage());
+        }
     }
     
     

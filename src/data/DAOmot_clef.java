@@ -82,6 +82,15 @@ public class DAOmot_clef extends DAO {
         
     }
     
+    public void delete(Mot_clef mc){
+        try {
+            Statement stm = this.getConnection().createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            stm.executeUpdate("DELETE FROM Mot_clef where id_mot_clef = " + mc.getId_mot_clef());
+        } catch (SQLException ex) {
+            System.err.println("Oops:SQL:" + ex.getErrorCode() + "/" + ex.getMessage());
+        }
+    }
+    
     public List<Ouvrage> getOuvragesByID(Mot_clef mc) {
         List<Ouvrage> lesOuvrages = new ArrayList<>();
 
@@ -128,6 +137,37 @@ public class DAOmot_clef extends DAO {
             System.err.println("Oops:SQL:" + ex.getErrorCode() + "/" + ex.getMessage());
         }
         
+    }
+    
+    public void deleteAssocier(Ouvrage o){
+        try {
+            Statement stm = this.getConnection().createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            stm.executeUpdate("DELETE FROM Associer where ISBN = " + o.getIsbn());
+        } catch (SQLException ex) {
+            System.err.println("Oops:SQL:" + ex.getErrorCode() + "/" + ex.getMessage());
+        }
+    }
+    
+    public void deleteAssocier(Mot_clef mc){
+        try {
+            Statement stm = this.getConnection().createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            stm.executeUpdate("DELETE FROM Associer where id_mot_clef = " + mc.getId_mot_clef());
+        } catch (SQLException ex) {
+            System.err.println("Oops:SQL:" + ex.getErrorCode() + "/" + ex.getMessage());
+        }
+    }
+    
+    public void deleteAssocier(Ouvrage o, Mot_clef mc){
+        try {
+            String query = "DELETE FROM Associer WHERE id_mot_clef = ? AND ISBN = ?";
+            PreparedStatement pstmt = this.getConnection().prepareStatement(query);
+            pstmt.setInt(1, mc.getId_mot_clef());
+            pstmt.setString(2, o.getIsbn());
+            int result = pstmt.executeUpdate();
+            
+        } catch (SQLException ex) {
+            System.err.println("Oops:SQL:" + ex.getErrorCode() + "/" + ex.getMessage());
+        }
     }
 
 }

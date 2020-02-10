@@ -87,6 +87,15 @@ public class DAOediteur extends DAO{
         
     }
     
+    public void delete(Editeur e){
+        try {
+            Statement stm = this.getConnection().createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            stm.executeUpdate("DELETE FROM Editeur where id_editeur = " + e.getId_editeur());
+        } catch (SQLException ex) {
+            System.err.println("Oops:SQL:" + ex.getErrorCode() + "/" + ex.getMessage());
+        }
+    }
+    
     public List<Ouvrage> getOuvragesByID(Editeur e) {
         List<Ouvrage> lesOuvrages = new ArrayList<>();
 
@@ -133,6 +142,37 @@ public class DAOediteur extends DAO{
             System.err.println("Oops:SQL:" + ex.getErrorCode() + "/" + ex.getMessage());
         }
         
+    }
+    
+    public void deletePublier(Ouvrage o){
+        try {
+            Statement stm = this.getConnection().createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            stm.executeUpdate("DELETE FROM Publier where ISBN = " + o.getIsbn());
+        } catch (SQLException ex) {
+            System.err.println("Oops:SQL:" + ex.getErrorCode() + "/" + ex.getMessage());
+        }
+    }
+    
+    public void deletePublier(Editeur e){
+        try {
+            Statement stm = this.getConnection().createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            stm.executeUpdate("DELETE FROM Publier where id_editeur = " + e.getId_editeur());
+        } catch (SQLException ex) {
+            System.err.println("Oops:SQL:" + ex.getErrorCode() + "/" + ex.getMessage());
+        }
+    }
+    
+    public void deletePublier(Ouvrage o, Editeur e){
+        try {
+            String query = "DELETE FROM Publier WHERE id_editeur = ? AND ISBN = ?";
+            PreparedStatement pstmt = this.getConnection().prepareStatement(query);
+            pstmt.setInt(1, e.getId_editeur());
+            pstmt.setString(2, o.getIsbn());
+            int result = pstmt.executeUpdate();
+            
+        } catch (SQLException ex) {
+            System.err.println("Oops:SQL:" + ex.getErrorCode() + "/" + ex.getMessage());
+        }
     }
     
     

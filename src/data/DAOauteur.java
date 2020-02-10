@@ -114,6 +114,15 @@ public class DAOauteur extends DAO {
         return lesOuvrages;
     }
     
+    public void delete(Auteur a){
+        try {
+            Statement stm = this.getConnection().createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            stm.executeUpdate("DELETE FROM Auteur WHERE id_auteur = " + a.getId_auteur());
+        } catch (SQLException ex) {
+            System.err.println("Oops:SQL:" + ex.getErrorCode() + "/" + ex.getMessage());
+        }
+    }
+    
     public void Ecrire(Auteur a, Ouvrage o){
         
         try {
@@ -132,5 +141,36 @@ public class DAOauteur extends DAO {
             System.err.println("Oops:SQL:" + ex.getErrorCode() + "/" + ex.getMessage());
         }
         
+    }
+    
+    public void deleteEcrire(Ouvrage o){
+        try {
+            Statement stm = this.getConnection().createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            stm.executeUpdate("DELETE FROM Ecrire where ISBN = " + o.getIsbn());
+        } catch (SQLException ex) {
+            System.err.println("Oops:SQL:" + ex.getErrorCode() + "/" + ex.getMessage());
+        }
+    }
+    
+    public void deleteEcrire(Auteur a){
+        try {
+            Statement stm = this.getConnection().createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            stm.executeUpdate("DELETE FROM Ecrire where ID_AUTEUR = " + a.getId_auteur());
+        } catch (SQLException ex) {
+            System.err.println("Oops:SQL:" + ex.getErrorCode() + "/" + ex.getMessage());
+        }
+    }
+    
+    public void deleteEcrire(Ouvrage o, Auteur a){
+        try {
+            String query = "DELETE FROM Ecrire WHERE ID_AUTEUR = ? AND ISBN = ?";
+            PreparedStatement pstmt = this.getConnection().prepareStatement(query);
+            pstmt.setInt(1, a.getId_auteur());
+            pstmt.setString(2, o.getIsbn());
+            int result = pstmt.executeUpdate();
+            
+        } catch (SQLException ex) {
+            System.err.println("Oops:SQL:" + ex.getErrorCode() + "/" + ex.getMessage());
+        }
     }
 }

@@ -22,10 +22,8 @@ public class Librairie {
     private ArrayList <Livraison> lesLivraisons;
     private ArrayList <Organisme_Paiement> lesOrganisme_Paiements;
     private ArrayList <Paiement> lesPaiements;
-    private ArrayList <Etre_facture> lesEtre_factures;
-    private ArrayList <Etre_livre> lesEtre_livres;
-    private ArrayList <Gerer> lesGerers;
-
+    
+    
     public Librairie() {
     }
     
@@ -175,30 +173,6 @@ public class Librairie {
         this.lesPaiements = lesPaiements;
     }
 
-    public ArrayList<Etre_facture> getLesEtre_factures() {
-        return lesEtre_factures;
-    }
-
-    public void setLesEtre_factures(ArrayList<Etre_facture> lesEtre_factures) {
-        this.lesEtre_factures = lesEtre_factures;
-    }
-
-    public ArrayList<Etre_livre> getLesEtre_livres() {
-        return lesEtre_livres;
-    }
-
-    public void setLesEtre_livres(ArrayList<Etre_livre> lesEtre_livres) {
-        this.lesEtre_livres = lesEtre_livres;
-    }
-
-    public ArrayList<Gerer> getLesGerers() {
-        return lesGerers;
-    }
-
-    public void setLesGerers(ArrayList<Gerer> lesGerers) {
-        this.lesGerers = lesGerers;
-    }
-   
     
      /* METHODE POUR AJOUTER DES OBJETS AUX TABLEAUX*/
     
@@ -228,23 +202,12 @@ public class Librairie {
     public void AjouterEmploye (Employe employe){
         this.lesEmployes.add(employe);
     }
-    
-    public void AjouterEtre_facture (Etre_facture etre_facture){
-        this.lesEtre_factures.add(etre_facture);
-    }
-    
-    public void AjouterEtre_livre (Etre_livre etre_livre){
-        this.lesEtre_livres.add(etre_livre);
-    }
+
      
     public void AjouterEvenement (Evenement evenement){
         this.lesEvenements.add(evenement);
     }
-     
-    public void AjouterGerer (Gerer gerer){
-        this.lesGerers.add(gerer);
-    } 
-     
+          
     public void AjouterLigne_commande (Ligne_commande ligne_commande){
         this.lesLigne_commandes.add(ligne_commande);
     } 
@@ -318,22 +281,10 @@ public class Librairie {
     public void SupprimerEmploye (Employe employe){
         this.lesEmployes.remove(employe);
     }
-    
-    public void SupprimerEtre_facture (Etre_facture etre_facture){
-        this.lesEtre_factures.remove(etre_facture);
-    }
-    
-    public void SupprimerEtre_livre (Etre_livre etre_livre){
-        this.lesEtre_livres.remove(etre_livre);
-    }
      
     public void SupprimerEvenement (Evenement evenement){
         this.lesEvenements.remove(evenement);
     }
-     
-    public void SupprimerGerer (Gerer gerer){
-        this.lesGerers.remove(gerer);
-    } 
      
     public void SupprimerLigne_commande (Ligne_commande ligne_commande){
         this.lesLigne_commandes.remove(ligne_commande);

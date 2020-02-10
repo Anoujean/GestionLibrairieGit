@@ -80,6 +80,15 @@ public class DAOtheme extends DAO{
         }
     }
     
+    public void delete(Theme t){
+        try {
+            Statement stm = this.getConnection().createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            stm.executeUpdate("DELETE FROM Theme where id_sous_theme = " + t.getId_theme());
+        } catch (SQLException ex) {
+            System.err.println("Oops:SQL:" + ex.getErrorCode() + "/" + ex.getMessage());
+        }
+    }
+    
     public List<Sous_theme> getSousThemeByID(Theme t) {
         List<Sous_theme> lesSous_themes = new ArrayList<>();
         try {

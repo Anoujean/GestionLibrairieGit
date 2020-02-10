@@ -21,6 +21,13 @@ public class AppliMain01 {
     public static void main(String[] args) {
         // TODO code application logic here
         
+        DAOouvrage dao = new DAOouvrage();
+        dao.open();
+        Ouvrage o = new Ouvrage();
+        o.setIsbn("2070601579");
+        System.out.println(""+dao.getCommentairesByID(o));
+        dao.close();
+        
     }
     
 }

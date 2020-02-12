@@ -21,6 +21,7 @@ public class DAOauteur extends DAO {
     }
 
     public List<Auteur> select() {
+        this.open();
         List<Auteur> lesAuteurs = new ArrayList<>();
         try {
             Statement stmt = this.getConnection().createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
@@ -31,6 +32,7 @@ public class DAOauteur extends DAO {
 
             while (rs.next()) {
                 Auteur lAuteur = new Auteur(rs.getInt("ID_AUTEUR"), rs.getString("NOM"), rs.getString("PRENOM"), rs.getString("DATE_DE_NAISSANCE"), rs.getString("DATE_DE_DECES"));
+                lAuteur.setLesOuvrages(this.getOuvragesByID(lAuteur));
                 lesAuteurs.add(lAuteur);
             }
 
@@ -40,11 +42,13 @@ public class DAOauteur extends DAO {
         } catch (SQLException ex) {
             System.err.println("Oops:SQL:" + ex.getErrorCode() + "/" + ex.getMessage());
         }
+        this.close();
 
         return lesAuteurs;
     }
 
     public void insert(Auteur a) {
+        this.open();
 
         try {
             String query = "INSERT INTO Auteur(nom, prenom, date_de_naissance, date_de_deces) VALUES (?,?,?,?);";
@@ -63,10 +67,12 @@ public class DAOauteur extends DAO {
         } catch (SQLException ex) {
             System.err.println("Oops:SQL:" + ex.getErrorCode() + "/" + ex.getMessage());
         }
+        this.close();
 
     }
 
     public void update(Auteur a) {
+        this.open();
         try {
             String query = "UPDATE Auteur SET nom = ? , prenom = ? , date_de_naissance = ? , date_de_deces = ? WHERE id_auteur = ? ;";
             PreparedStatement pstmt = this.getConnection().prepareStatement(query);
@@ -85,6 +91,7 @@ public class DAOauteur extends DAO {
         } catch (SQLException ex) {
             System.err.println("Oops:SQL:" + ex.getErrorCode() + "/" + ex.getMessage());
         }
+        this.close();
     }
 
     public List<Ouvrage> getOuvragesByID(Auteur a) {
@@ -96,7 +103,7 @@ public class DAOauteur extends DAO {
             PreparedStatement pstmt = this.getConnection().prepareStatement(query);
             pstmt.setInt(1, a.getId_auteur());
 
-            ResultSet rs = pstmt.executeQuery(query);
+            ResultSet rs = pstmt.executeQuery();
 
             while (rs.next()) {
                 Statut leStatut = new Statut(rs.getInt("ID_STATUT"), rs.getString("NOM_STATUT"));
@@ -115,15 +122,18 @@ public class DAOauteur extends DAO {
     }
     
     public void delete(Auteur a){
+        this.open();
         try {
             Statement stm = this.getConnection().createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
             stm.executeUpdate("DELETE FROM Auteur WHERE id_auteur = " + a.getId_auteur());
         } catch (SQLException ex) {
             System.err.println("Oops:SQL:" + ex.getErrorCode() + "/" + ex.getMessage());
         }
+        this.close();
     }
     
     public void Ecrire(Auteur a, Ouvrage o){
+        this.open();
         
         try {
             String query = "INSERT INTO Ecrire VALUES (?,?);";
@@ -140,28 +150,34 @@ public class DAOauteur extends DAO {
         } catch (SQLException ex) {
             System.err.println("Oops:SQL:" + ex.getErrorCode() + "/" + ex.getMessage());
         }
+        this.close();
         
     }
     
     public void deleteEcrire(Ouvrage o){
+        this.open();
         try {
             Statement stm = this.getConnection().createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
             stm.executeUpdate("DELETE FROM Ecrire where ISBN = " + o.getIsbn());
         } catch (SQLException ex) {
             System.err.println("Oops:SQL:" + ex.getErrorCode() + "/" + ex.getMessage());
         }
+        this.close();
     }
     
     public void deleteEcrire(Auteur a){
+        this.open();
         try {
             Statement stm = this.getConnection().createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
             stm.executeUpdate("DELETE FROM Ecrire where ID_AUTEUR = " + a.getId_auteur());
         } catch (SQLException ex) {
             System.err.println("Oops:SQL:" + ex.getErrorCode() + "/" + ex.getMessage());
         }
+        this.close();
     }
     
     public void deleteEcrire(Ouvrage o, Auteur a){
+        this.open();
         try {
             String query = "DELETE FROM Ecrire WHERE ID_AUTEUR = ? AND ISBN = ?";
             PreparedStatement pstmt = this.getConnection().prepareStatement(query);
@@ -172,5 +188,6 @@ public class DAOauteur extends DAO {
         } catch (SQLException ex) {
             System.err.println("Oops:SQL:" + ex.getErrorCode() + "/" + ex.getMessage());
         }
+        this.close();
     }
 }

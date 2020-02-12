@@ -6,7 +6,7 @@ public class Theme implements Comparable<Theme> {
 
     private int id_theme;
     private String libelle;
-    private List<Sous_theme> leSous_themes;
+    private List<Sous_theme> lesSous_themes;
 
     
 
@@ -39,16 +39,20 @@ public class Theme implements Comparable<Theme> {
     }
     
     public List<Sous_theme> getLeSous_themes() {
-        return leSous_themes;
+        return lesSous_themes;
     }
 
     public void setLeSous_themes(List<Sous_theme> leSous_themes) {
-        this.leSous_themes = leSous_themes;
+        this.lesSous_themes = leSous_themes;
+    }
+    
+    public void add(Sous_theme st){
+        this.lesSous_themes.add(st);
     }
 
     @Override
     public String toString() {
-        return "Theme{" + "id_theme=" + id_theme + ", libelle=" + libelle + '}';
+        return libelle;
     }
 
     @Override

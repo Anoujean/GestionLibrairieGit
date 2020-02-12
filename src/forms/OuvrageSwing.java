@@ -7,6 +7,10 @@ package forms;
 
 import classes.*;
 import data.*;
+import java.util.*;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeModel;
 
 /**
  *
@@ -17,15 +21,13 @@ public class OuvrageSwing extends javax.swing.JFrame {
     /**
      * Creates new form Ouvrage
      */
-    
     private Librairie lib = new Librairie();
-    private DAOtheme dao = new DAOtheme();
-    
+
     public OuvrageSwing() {
+        lib.load();
+        Collections.sort(lib.getLesSous_themes());
         initComponents();
-        dao.open();
-        lib.setLesThemes(dao.select());
-        dao.close();
+        this.pnl_cb_theme.setVisible(false);
     }
 
     /**
@@ -37,15 +39,49 @@ public class OuvrageSwing extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        javax.swing.JTabbedPane tbp_gestion = new javax.swing.JTabbedPane();
+        btngrp_theme_sous_theme = new javax.swing.ButtonGroup();
+        pnl_mots_cles = new javax.swing.JTabbedPane();
         pnl_ouvrages = new javax.swing.JPanel();
         pnl_themes = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tbl_themes = new javax.swing.JTable();
-        pnl_sous_themes = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTree_theme = new javax.swing.JTree();
+        rb_theme = new javax.swing.JRadioButton();
+        rb_sous_theme = new javax.swing.JRadioButton();
+        pnl_cb_theme = new javax.swing.JPanel();
+        lbl_cb_theme = new javax.swing.JLabel();
+        cb_theme = new javax.swing.JComboBox();
+        pnl_info_theme = new javax.swing.JPanel();
+        lbl_theme_id_libelle = new javax.swing.JLabel();
+        lbl_theme_id = new javax.swing.JLabel();
+        lbl_libelle_theme_libelle = new javax.swing.JLabel();
+        tf_theme_libelle = new javax.swing.JTextField();
+        btn_theme_ajouter = new javax.swing.JButton();
+        btn_theme_modifier = new javax.swing.JButton();
         pnl_auteurs = new javax.swing.JPanel();
+        jPanel1 = new javax.swing.JPanel();
+        jTextField1 = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jTextField2 = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        jTextField3 = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        jTextField4 = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        jTextField5 = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTree_auteur = new javax.swing.JTree();
         pnl_editeurs = new javax.swing.JPanel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jTree_editeurs = new javax.swing.JTree();
+        pnl_info_editeur = new javax.swing.JPanel();
         pnl_evenement = new javax.swing.JPanel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        jTree_Evenement = new javax.swing.JTree();
+        pnl_info_evenement = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -60,87 +96,352 @@ public class OuvrageSwing extends javax.swing.JFrame {
             .addGap(0, 590, Short.MAX_VALUE)
         );
 
-        tbp_gestion.addTab("Ouvrages", pnl_ouvrages);
+        pnl_mots_cles.addTab("Ouvrages", pnl_ouvrages);
 
-        tbl_themes.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+        jTree_theme.setModel(initThemesTreeModel());
+        jTree_theme.addTreeSelectionListener(new javax.swing.event.TreeSelectionListener() {
+            public void valueChanged(javax.swing.event.TreeSelectionEvent evt) {
+                jTree_themeValueChanged(evt);
             }
-        ));
-        jScrollPane1.setViewportView(tbl_themes);
+        });
+        jScrollPane2.setViewportView(jTree_theme);
+
+        btngrp_theme_sous_theme.add(rb_theme);
+        rb_theme.setText("Thème");
+        rb_theme.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                rb_themeItemStateChanged(evt);
+            }
+        });
+
+        btngrp_theme_sous_theme.add(rb_sous_theme);
+        rb_sous_theme.setText("Sous-thème");
+        rb_sous_theme.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                rb_sous_themeItemStateChanged(evt);
+            }
+        });
+
+        pnl_cb_theme.setBackground(new java.awt.Color(204, 255, 255));
+
+        lbl_cb_theme.setText("Son Thème");
+
+        cb_theme.setModel(initThemeModelComboBox());
+
+        javax.swing.GroupLayout pnl_cb_themeLayout = new javax.swing.GroupLayout(pnl_cb_theme);
+        pnl_cb_theme.setLayout(pnl_cb_themeLayout);
+        pnl_cb_themeLayout.setHorizontalGroup(
+            pnl_cb_themeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnl_cb_themeLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lbl_cb_theme, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(cb_theme, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        pnl_cb_themeLayout.setVerticalGroup(
+            pnl_cb_themeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnl_cb_themeLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pnl_cb_themeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbl_cb_theme, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(cb_theme, javax.swing.GroupLayout.DEFAULT_SIZE, 55, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+
+        pnl_info_theme.setBackground(new java.awt.Color(204, 255, 255));
+
+        lbl_theme_id_libelle.setText("Identifiant :");
+
+        lbl_theme_id.setForeground(new java.awt.Color(255, 255, 0));
+
+        lbl_libelle_theme_libelle.setText("Libellé");
+
+        javax.swing.GroupLayout pnl_info_themeLayout = new javax.swing.GroupLayout(pnl_info_theme);
+        pnl_info_theme.setLayout(pnl_info_themeLayout);
+        pnl_info_themeLayout.setHorizontalGroup(
+            pnl_info_themeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnl_info_themeLayout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addGroup(pnl_info_themeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(lbl_libelle_theme_libelle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lbl_theme_id_libelle, javax.swing.GroupLayout.DEFAULT_SIZE, 75, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(pnl_info_themeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lbl_theme_id, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(tf_theme_libelle))
+                .addContainerGap())
+        );
+        pnl_info_themeLayout.setVerticalGroup(
+            pnl_info_themeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnl_info_themeLayout.createSequentialGroup()
+                .addGap(23, 23, 23)
+                .addGroup(pnl_info_themeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbl_theme_id_libelle, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbl_theme_id, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnl_info_themeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbl_libelle_theme_libelle, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tf_theme_libelle, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(34, Short.MAX_VALUE))
+        );
+
+        btn_theme_ajouter.setBackground(new java.awt.Color(153, 255, 153));
+        btn_theme_ajouter.setText("Ajouter");
+        btn_theme_ajouter.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_theme_ajouterActionPerformed(evt);
+            }
+        });
+
+        btn_theme_modifier.setBackground(new java.awt.Color(255, 255, 153));
+        btn_theme_modifier.setText("Modifier");
+        btn_theme_modifier.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_theme_modifierActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnl_themesLayout = new javax.swing.GroupLayout(pnl_themes);
         pnl_themes.setLayout(pnl_themesLayout);
         pnl_themesLayout.setHorizontalGroup(
             pnl_themesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 575, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnl_themesLayout.createSequentialGroup()
+                .addGroup(pnl_themesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnl_themesLayout.createSequentialGroup()
+                        .addGap(67, 67, 67)
+                        .addComponent(rb_theme)
+                        .addGap(72, 72, 72)
+                        .addComponent(rb_sous_theme)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(pnl_themesLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(pnl_themesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(pnl_info_theme, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(pnl_cb_theme, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnl_themesLayout.createSequentialGroup()
+                                .addComponent(btn_theme_ajouter, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btn_theme_modifier, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         pnl_themesLayout.setVerticalGroup(
             pnl_themesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnl_themesLayout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 163, Short.MAX_VALUE))
+                .addContainerGap()
+                .addGroup(pnl_themesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 568, Short.MAX_VALUE)
+                    .addGroup(pnl_themesLayout.createSequentialGroup()
+                        .addGroup(pnl_themesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(rb_theme)
+                            .addComponent(rb_sous_theme))
+                        .addGap(18, 18, 18)
+                        .addComponent(pnl_info_theme, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(pnl_cb_theme, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(29, 29, 29)
+                        .addGroup(pnl_themesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btn_theme_ajouter, javax.swing.GroupLayout.DEFAULT_SIZE, 52, Short.MAX_VALUE)
+                            .addComponent(btn_theme_modifier, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
 
-        tbp_gestion.addTab("Thèmes", pnl_themes);
+        pnl_mots_cles.addTab("Thèmes & Sous-Thèmes", pnl_themes);
 
-        javax.swing.GroupLayout pnl_sous_themesLayout = new javax.swing.GroupLayout(pnl_sous_themes);
-        pnl_sous_themes.setLayout(pnl_sous_themesLayout);
-        pnl_sous_themesLayout.setHorizontalGroup(
-            pnl_sous_themesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 575, Short.MAX_VALUE)
+        jPanel1.setBackground(new java.awt.Color(204, 255, 255));
+
+        jLabel1.setText("Identifiant");
+
+        jLabel2.setText("Nom");
+
+        jLabel3.setText("Prenom");
+
+        jLabel4.setText("Date de naissance");
+
+        jLabel5.setText("Date de décès");
+
+        jButton1.setBackground(new java.awt.Color(204, 255, 204));
+        jButton1.setText("Ajouter");
+
+        jButton2.setBackground(new java.awt.Color(255, 255, 204));
+        jButton2.setText("Modifier");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 164, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 114, Short.MAX_VALUE)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTextField1)
+                            .addComponent(jTextField2)
+                            .addComponent(jTextField3)
+                            .addComponent(jTextField4)
+                            .addComponent(jTextField5))))
+                .addContainerGap())
         );
-        pnl_sous_themesLayout.setVerticalGroup(
-            pnl_sous_themesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 590, Short.MAX_VALUE)
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jTextField3, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jTextField4, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jTextField5, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 60, Short.MAX_VALUE)
+                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        tbp_gestion.addTab("Sous-thèmes", pnl_sous_themes);
+        jTree_auteur.setModel(initAuteursTreeModel());
+        jScrollPane1.setViewportView(jTree_auteur);
 
         javax.swing.GroupLayout pnl_auteursLayout = new javax.swing.GroupLayout(pnl_auteurs);
         pnl_auteurs.setLayout(pnl_auteursLayout);
         pnl_auteursLayout.setHorizontalGroup(
             pnl_auteursLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 575, Short.MAX_VALUE)
+            .addGroup(pnl_auteursLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         pnl_auteursLayout.setVerticalGroup(
             pnl_auteursLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 590, Short.MAX_VALUE)
+            .addGroup(pnl_auteursLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pnl_auteursLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 568, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
-        tbp_gestion.addTab("Auteurs", pnl_auteurs);
+        pnl_mots_cles.addTab("Auteurs", pnl_auteurs);
+
+        jTree_editeurs.setModel(initEditeursTreeModel());
+        jScrollPane3.setViewportView(jTree_editeurs);
+
+        pnl_info_editeur.setBackground(new java.awt.Color(204, 255, 255));
+
+        javax.swing.GroupLayout pnl_info_editeurLayout = new javax.swing.GroupLayout(pnl_info_editeur);
+        pnl_info_editeur.setLayout(pnl_info_editeurLayout);
+        pnl_info_editeurLayout.setHorizontalGroup(
+            pnl_info_editeurLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 355, Short.MAX_VALUE)
+        );
+        pnl_info_editeurLayout.setVerticalGroup(
+            pnl_info_editeurLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
 
         javax.swing.GroupLayout pnl_editeursLayout = new javax.swing.GroupLayout(pnl_editeurs);
         pnl_editeurs.setLayout(pnl_editeursLayout);
         pnl_editeursLayout.setHorizontalGroup(
             pnl_editeursLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 575, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnl_editeursLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(pnl_info_editeur, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         pnl_editeursLayout.setVerticalGroup(
             pnl_editeursLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 590, Short.MAX_VALUE)
+            .addGroup(pnl_editeursLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pnl_editeursLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 568, Short.MAX_VALUE)
+                    .addComponent(pnl_info_editeur, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
-        tbp_gestion.addTab("Editeurs", pnl_editeurs);
+        pnl_mots_cles.addTab("Editeurs", pnl_editeurs);
+
+        jTree_Evenement.setModel(initEvenementsTreeModel());
+        jScrollPane4.setViewportView(jTree_Evenement);
+
+        pnl_info_evenement.setBackground(new java.awt.Color(204, 255, 255));
+
+        javax.swing.GroupLayout pnl_info_evenementLayout = new javax.swing.GroupLayout(pnl_info_evenement);
+        pnl_info_evenement.setLayout(pnl_info_evenementLayout);
+        pnl_info_evenementLayout.setHorizontalGroup(
+            pnl_info_evenementLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 365, Short.MAX_VALUE)
+        );
+        pnl_info_evenementLayout.setVerticalGroup(
+            pnl_info_evenementLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
 
         javax.swing.GroupLayout pnl_evenementLayout = new javax.swing.GroupLayout(pnl_evenement);
         pnl_evenement.setLayout(pnl_evenementLayout);
         pnl_evenementLayout.setHorizontalGroup(
             pnl_evenementLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 575, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnl_evenementLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(pnl_info_evenement, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         pnl_evenementLayout.setVerticalGroup(
             pnl_evenementLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnl_evenementLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pnl_evenementLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 568, Short.MAX_VALUE)
+                    .addComponent(pnl_info_evenement, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+
+        pnl_mots_cles.addTab("Evenement", pnl_evenement);
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 575, Short.MAX_VALUE)
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 590, Short.MAX_VALUE)
         );
 
-        tbp_gestion.addTab("Evenement", pnl_evenement);
+        pnl_mots_cles.addTab("Mots-Clés", jPanel2);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -148,21 +449,197 @@ public class OuvrageSwing extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(tbp_gestion)
+                .addComponent(pnl_mots_cles)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(21, 21, 21)
-                .addComponent(tbp_gestion)
+                .addComponent(pnl_mots_cles)
                 .addContainerGap())
         );
 
         setSize(new java.awt.Dimension(616, 689));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+    
+    
+    /*PARTIE THEME & SOUS-THEME-----------------------------------------------------------------------------------------------------------------------------------------------------*/
+    private DefaultComboBoxModel initThemeModelComboBox() {
+        return new DefaultComboBoxModel(initThemeVector());
+    }
 
+    private Vector initThemeVector() {
+        Vector v = new Vector();
+        for (Theme leTheme : this.lib.getLesThemes()) {
+            v.add(leTheme);
+        }
+        Collections.sort(v);
+        return v;
+    }
+
+    private DefaultTreeModel initThemesTreeModel() {
+        return new DefaultTreeModel(initThemesTree());
+    }
+
+    private DefaultMutableTreeNode initThemesTree() {
+        DefaultMutableTreeNode root = new DefaultMutableTreeNode("Mes Themes");
+
+        DefaultMutableTreeNode tnTheme = null;
+        DefaultMutableTreeNode tnSousTheme = null;
+
+        Collections.sort(this.lib.getLesThemes());
+        for (Theme unTheme : this.lib.getLesThemes()) {
+            tnTheme = new DefaultMutableTreeNode(unTheme);
+            root.add(tnTheme);
+            List<Sous_theme> sesSousThemes = unTheme.getLeSous_themes();
+            if (sesSousThemes != null) {
+                Collections.sort(sesSousThemes);
+                for (Sous_theme unSousTheme : sesSousThemes) {
+                    tnTheme.add(tnSousTheme = new DefaultMutableTreeNode(unSousTheme));
+                }
+            }
+        }
+        System.out.println("Done!");
+
+        return root;
+    }
+    
+    private void btn_theme_modifierActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_theme_modifierActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_theme_modifierActionPerformed
+
+    private void btn_theme_ajouterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_theme_ajouterActionPerformed
+        // TODO add your handling code here:
+        if (this.rb_sous_theme.isSelected()) {
+            Sous_theme unSousTheme = new Sous_theme(this.tf_theme_libelle.getText(), (Theme) this.cb_theme.getSelectedItem());
+            lib.AjouterSous_theme(unSousTheme);
+        } else {
+            Theme unTheme = new Theme(this.tf_theme_libelle.getText());
+            lib.AjouterTheme(unTheme);
+        }
+        jTree_theme.setModel(this.initThemesTreeModel());
+        cb_theme.setModel(this.initThemeModelComboBox());
+    }//GEN-LAST:event_btn_theme_ajouterActionPerformed
+
+    private void rb_sous_themeItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_rb_sous_themeItemStateChanged
+        // TODO add your handling code here:
+        this.pnl_cb_theme.setVisible(true);
+    }//GEN-LAST:event_rb_sous_themeItemStateChanged
+
+    private void rb_themeItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_rb_themeItemStateChanged
+        // TODO add your handling code here:
+        this.pnl_cb_theme.setVisible(false);
+    }//GEN-LAST:event_rb_themeItemStateChanged
+
+    private void jTree_themeValueChanged(javax.swing.event.TreeSelectionEvent evt) {//GEN-FIRST:event_jTree_themeValueChanged
+        // TODO add your handling code here:
+        DefaultMutableTreeNode tn = (DefaultMutableTreeNode) jTree_theme.getLastSelectedPathComponent();
+        if (tn.getUserObject() instanceof Sous_theme) {
+            Sous_theme a = (Sous_theme) tn.getUserObject();
+            this.rb_sous_theme.setSelected(true);
+            this.lbl_theme_id.setText("" + a.getId_sous_theme());
+            this.tf_theme_libelle.setText(a.getLibelle());
+            this.cb_theme.setSelectedItem(a.getTheme());
+        } else {
+            Theme a = (Theme) tn.getUserObject();
+            this.rb_theme.setSelected(true);
+            this.lbl_theme_id.setText("" + a.getId_theme());
+            this.tf_theme_libelle.setText(a.getLibelle());
+        }
+    }//GEN-LAST:event_jTree_themeValueChanged
+    /*FIN THEME & SOUS-THEME------------------------------------------------------------------------------------------------------------------------------------------------------*/
+    
+    
+    /*PARTIE AUTEURS -------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+    private DefaultTreeModel initAuteursTreeModel() {
+        return new DefaultTreeModel(initAuteursTree());
+    }
+
+    private DefaultMutableTreeNode initAuteursTree() {
+        DefaultMutableTreeNode root = new DefaultMutableTreeNode("Mes Auteurs");
+
+        DefaultMutableTreeNode tnAuteur = null;
+        DefaultMutableTreeNode tnOuvrage = null;
+
+        Collections.sort(this.lib.getLesAuteurs());
+        for (Auteur unAuteur : this.lib.getLesAuteurs()) {
+            tnAuteur = new DefaultMutableTreeNode(unAuteur);
+            root.add(tnAuteur);
+            List<Ouvrage> sesOuvrages = unAuteur.getLesOuvrages();
+            if (sesOuvrages != null) {
+                Collections.sort(sesOuvrages);
+                for (Ouvrage unOuvrage : sesOuvrages) {
+                    tnAuteur.add(tnOuvrage = new DefaultMutableTreeNode(unOuvrage));
+                }
+            }
+        }
+        System.out.println("Done!");
+
+        return root;
+    }
+    /*FIN AUTEURS ----------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+    
+    /*PARTIE EDITEUR -------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+    private DefaultTreeModel initEditeursTreeModel() {
+        return new DefaultTreeModel(initEditeursTree());
+    }
+
+    private DefaultMutableTreeNode initEditeursTree() {
+        DefaultMutableTreeNode root = new DefaultMutableTreeNode("Mes Editeurs");
+
+        DefaultMutableTreeNode tnEditeur = null;
+        DefaultMutableTreeNode tnOuvrage = null;
+
+        Collections.sort(this.lib.getLesEditeurs());
+        for (Editeur unEditeur : this.lib.getLesEditeurs()) {
+            tnEditeur = new DefaultMutableTreeNode(unEditeur);
+            root.add(tnEditeur);
+            List<Ouvrage> sesOuvrages = unEditeur.getLesOuvrages();
+            if (sesOuvrages != null) {
+                Collections.sort(sesOuvrages);
+                for (Ouvrage unOuvrage : sesOuvrages) {
+                    tnEditeur.add(tnOuvrage = new DefaultMutableTreeNode(unOuvrage));
+                }
+            }
+        }
+        System.out.println("Done!");
+
+        return root;
+    }
+    /*FIN EDITEUR ----------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+    
+    /*PARTIE EVENEMENT -------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+    private DefaultTreeModel initEvenementsTreeModel() {
+        return new DefaultTreeModel(initEvenementsTree());
+    }
+
+    private DefaultMutableTreeNode initEvenementsTree() {
+        DefaultMutableTreeNode root = new DefaultMutableTreeNode("Mes Editeurs");
+
+        DefaultMutableTreeNode tnEvenement = null;
+        DefaultMutableTreeNode tnOuvrage = null;
+
+        Collections.sort(this.lib.getLesEvenements());
+        for (Evenement unEvenement : this.lib.getLesEvenements()) {
+            tnEvenement = new DefaultMutableTreeNode(unEvenement);
+            root.add(tnEvenement);
+            List<Ouvrage> sesOuvrages = unEvenement.getLesOuvrages();
+            if (sesOuvrages != null) {
+                Collections.sort(sesOuvrages);
+                for (Ouvrage unOuvrage : sesOuvrages) {
+                    tnEvenement.add(tnOuvrage = new DefaultMutableTreeNode(unOuvrage));
+                }
+            }
+        }
+        System.out.println("Done!");
+
+        return root;
+    }
+    /*FIN EVENEMENT ----------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+    
+    
     /**
      * @param args the command line arguments
      */
@@ -200,13 +677,48 @@ public class OuvrageSwing extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btn_theme_ajouter;
+    private javax.swing.JButton btn_theme_modifier;
+    private javax.swing.ButtonGroup btngrp_theme_sous_theme;
+    private javax.swing.JComboBox cb_theme;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField jTextField3;
+    private javax.swing.JTextField jTextField4;
+    private javax.swing.JTextField jTextField5;
+    private javax.swing.JTree jTree_Evenement;
+    private javax.swing.JTree jTree_auteur;
+    private javax.swing.JTree jTree_editeurs;
+    private javax.swing.JTree jTree_theme;
+    private javax.swing.JLabel lbl_cb_theme;
+    private javax.swing.JLabel lbl_libelle_theme_libelle;
+    private javax.swing.JLabel lbl_theme_id;
+    private javax.swing.JLabel lbl_theme_id_libelle;
     private javax.swing.JPanel pnl_auteurs;
+    private javax.swing.JPanel pnl_cb_theme;
     private javax.swing.JPanel pnl_editeurs;
     private javax.swing.JPanel pnl_evenement;
+    private javax.swing.JPanel pnl_info_editeur;
+    private javax.swing.JPanel pnl_info_evenement;
+    private javax.swing.JPanel pnl_info_theme;
+    private javax.swing.JTabbedPane pnl_mots_cles;
     private javax.swing.JPanel pnl_ouvrages;
-    private javax.swing.JPanel pnl_sous_themes;
     private javax.swing.JPanel pnl_themes;
-    private javax.swing.JTable tbl_themes;
+    private javax.swing.JRadioButton rb_sous_theme;
+    private javax.swing.JRadioButton rb_theme;
+    private javax.swing.JTextField tf_theme_libelle;
     // End of variables declaration//GEN-END:variables
 }

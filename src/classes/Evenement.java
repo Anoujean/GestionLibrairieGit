@@ -1,5 +1,7 @@
 package classes;
 
+import java.util.List;
+
 public class Evenement implements Comparable<Evenement> {
 
     private int id_evenement;
@@ -11,6 +13,7 @@ public class Evenement implements Comparable<Evenement> {
     private String image;
     private float remise;
     private String commentaire;
+    private List<Ouvrage> lesOuvrages;
 
     public Evenement() {
 
@@ -121,9 +124,17 @@ public class Evenement implements Comparable<Evenement> {
         this.commentaire = commentaire;
     }
 
+    public List<Ouvrage> getLesOuvrages() {
+        return lesOuvrages;
+    }
+
+    public void setLesOuvrages(List<Ouvrage> lesOuvrages) {
+        this.lesOuvrages = lesOuvrages;
+    }
+
     @Override
     public String toString() {
-        return "Evenement{" + "id_evenement=" + id_evenement + ", statut=" + statut + ", libelle=" + libelle + ", date_debut=" + date_debut + ", date_fin=" + date_fin + ", description=" + description + ", image=" + image + ", remise=" + remise + ", commentaire=" + commentaire + '}';
+        return libelle ;
     }
 
     @Override

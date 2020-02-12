@@ -20,6 +20,7 @@ public class DAOtheme extends DAO{
     }
     
     public List<Theme> select(){
+        this.open();
         List<Theme> lesThemes = new ArrayList<>();
         try {
             Statement stmt = this.getConnection().createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
@@ -30,6 +31,7 @@ public class DAOtheme extends DAO{
 
             while (rs.next()) {
                 Theme leTheme = new Theme(rs.getInt("ID_THEME"), rs.getString("LIBELLE"));
+                leTheme.setLeSous_themes(this.getSousThemeByID(leTheme));
                 lesThemes.add(leTheme);
             }
 
@@ -39,11 +41,12 @@ public class DAOtheme extends DAO{
         } catch (SQLException ex) {
             System.err.println("Oops:SQL:" + ex.getErrorCode() + "/" + ex.getMessage());
         }
-        
+        this.close();
         return lesThemes;
     }
     
     public void insert(Theme t) {
+        this.open();
 
         try {
             String query = "INSERT INTO Theme(libelle) VALUES (?);";
@@ -59,10 +62,12 @@ public class DAOtheme extends DAO{
         } catch (SQLException ex) {
             System.err.println("Oops:SQL:" + ex.getErrorCode() + "/" + ex.getMessage());
         }
+        this.close();
 
     }
 
     public void update(Theme t) {
+        this.open();
         try {
             String query = "UPDATE Theme SET libelle = ? WHERE id_theme = ? ;";
             PreparedStatement pstmt = getConnection().prepareStatement(query);
@@ -78,15 +83,18 @@ public class DAOtheme extends DAO{
         } catch (SQLException ex) {
             System.err.println("Oops:SQL:" + ex.getErrorCode() + "/" + ex.getMessage());
         }
+        this.close();
     }
     
     public void delete(Theme t){
+        this.open();
         try {
             Statement stm = this.getConnection().createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
             stm.executeUpdate("DELETE FROM Theme where id_sous_theme = " + t.getId_theme());
         } catch (SQLException ex) {
             System.err.println("Oops:SQL:" + ex.getErrorCode() + "/" + ex.getMessage());
         }
+        this.close();
     }
     
     public List<Sous_theme> getSousThemeByID(Theme t) {
@@ -97,7 +105,7 @@ public class DAOtheme extends DAO{
             PreparedStatement pstmt = this.getConnection().prepareStatement(query);
             pstmt.setInt(1, t.getId_theme());
 
-            ResultSet rs = pstmt.executeQuery(query);
+            ResultSet rs = pstmt.executeQuery();
 
             while (rs.next()) {
                 Theme leTheme = new Theme(rs.getInt("ID_THEME"), rs.getString("LIBELLE_THEME"));

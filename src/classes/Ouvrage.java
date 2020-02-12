@@ -217,7 +217,7 @@ public class Ouvrage implements Comparable<Ouvrage> {
     
     @Override
     public String toString() {
-        return "Ouvrage{" + "isbn=" + isbn + ", statut=" + statut + ", titre=" + titre + ", image=" + image + ", sous_titre=" + sous_titre + ", resume=" + resume + ", stock=" + stock + ", tva=" + tva + ", commentaire=" + commentaire + '}';
+        return  titre +" "+ sous_titre ;
     }
 
     @Override

@@ -15,8 +15,9 @@ public class Sous_theme implements Comparable<Sous_theme> {
         this.libelle = libelle;
     }
 
-    public Sous_theme(String libelle) {
+    public Sous_theme(String libelle, Theme theme) {
         this.libelle = libelle;
+        this.theme = theme;
     }
 
     public int getId_sous_theme() {
@@ -45,7 +46,7 @@ public class Sous_theme implements Comparable<Sous_theme> {
 
     @Override
     public String toString() {
-        return "Sous_theme{" + "id_sous_theme=" + id_sous_theme + ", theme=" + theme + ", libelle=" + libelle + '}';
+        return libelle ;
     }
 
     @Override

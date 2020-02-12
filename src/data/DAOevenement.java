@@ -21,6 +21,7 @@ public class DAOevenement extends DAO{
     }
     
     public List<Evenement> select(){
+        this.open();
         List<Evenement> lesEvenements = new ArrayList<>();
         try {
             Statement stmt = this.getConnection().createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
@@ -32,6 +33,7 @@ public class DAOevenement extends DAO{
             while (rs.next()) {
                 Statut leStatut = new Statut(rs.getInt("ID_STATUT"), rs.getString("NOM_STATUT"));
                 Evenement lEvenement = new Evenement(rs.getInt("ID_EVENEMENT"), leStatut, rs.getString("LIBELLE"), rs.getString("DATE_DEBUT"), rs.getString("DATE_FIN"), rs.getString("DESCRIPTION"), rs.getString("IMAGE"), rs.getFloat("REMISE"), rs.getString("COMMENTAIRE"));
+                lEvenement.setLesOuvrages(this.getOuvragesByID(lEvenement));
                 lesEvenements.add(lEvenement);
             }
 
@@ -41,11 +43,13 @@ public class DAOevenement extends DAO{
         } catch (SQLException ex) {
             System.err.println("Oops:SQL:" + ex.getErrorCode() + "/" + ex.getMessage());
         }
+        this.close();
         
         return lesEvenements;
     }
     
     public void insert(Evenement e) {
+        this.open();
 
         try {
             String query = "INSERT INTO Evenement (id_statut, libelle, date_debut, date_fin, description, image, remise, commentaire) VALUES (?,?,?,?,?,?,?,?);";
@@ -70,10 +74,12 @@ public class DAOevenement extends DAO{
         } catch (SQLException ex) {
             System.err.println("Oops:SQL:" + ex.getErrorCode() + "/" + ex.getMessage());
         }
+        this.close();
 
     }
 
     public void update(Evenement e) {
+        this.open();
         
         try {
             String query = "UPDATE Evenement SET id_statut = ?, libelle = ?, date_debut = ?, date_fin = ?, description = ?, image = ?, remise = ?, commentaire = ? WHERE id_evenement = ?;";
@@ -97,16 +103,19 @@ public class DAOevenement extends DAO{
         } catch (SQLException ex) {
             System.err.println("Oops:SQL:" + ex.getErrorCode() + "/" + ex.getMessage());
         }
+        this.close();
         
     }
     
     public void delete(Evenement e){
+        this.open();
         try {
             Statement stm = this.getConnection().createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
             stm.executeUpdate("DELETE FROM Evenement where id_evenement = " + e.getId_evenement());
         } catch (SQLException ex) {
             System.err.println("Oops:SQL:" + ex.getErrorCode() + "/" + ex.getMessage());
         }
+        this.close();
     }
     
     public List<Ouvrage> getOuvragesByID(Evenement e) {
@@ -118,7 +127,7 @@ public class DAOevenement extends DAO{
             PreparedStatement pstmt = this.getConnection().prepareStatement(query);
             pstmt.setInt(1, e.getId_evenement());
 
-            ResultSet rs = pstmt.executeQuery(query);
+            ResultSet rs = pstmt.executeQuery();
 
             while (rs.next()) {
                 Statut leStatut = new Statut(rs.getInt("ID_STATUT"), rs.getString("NOM_STATUT"));
@@ -137,6 +146,7 @@ public class DAOevenement extends DAO{
     }
     
     public void Appartenir(Evenement e, Ouvrage o){
+        this.open();
         
         try {
             String query = "INSERT INTO Appartenir VALUES (?,?);";
@@ -154,28 +164,34 @@ public class DAOevenement extends DAO{
         } catch (SQLException ex) {
             System.err.println("Oops:SQL:" + ex.getErrorCode() + "/" + ex.getMessage());
         }
+        this.close();
         
     }
     
     public void deleteAppartenir(Ouvrage o){
+        this.open();
         try {
             Statement stm = this.getConnection().createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
             stm.executeUpdate("DELETE FROM Appartenir where ISBN = " + o.getIsbn());
         } catch (SQLException ex) {
             System.err.println("Oops:SQL:" + ex.getErrorCode() + "/" + ex.getMessage());
         }
+        this.close();
     }
     
     public void deleteAppartenir(Evenement e){
+        this.open();
         try {
             Statement stm = this.getConnection().createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
             stm.executeUpdate("DELETE FROM Appartenir where id_evenement = " + e.getId_evenement());
         } catch (SQLException ex) {
             System.err.println("Oops:SQL:" + ex.getErrorCode() + "/" + ex.getMessage());
         }
+        this.close();
     }
     
     public void deleteAppartenir(Ouvrage o, Evenement e){
+        this.open();
         try {
             String query = "DELETE FROM Evenement WHERE id_evenement = ? AND ISBN = ?";
             PreparedStatement pstmt = this.getConnection().prepareStatement(query);
@@ -186,6 +202,7 @@ public class DAOevenement extends DAO{
         } catch (SQLException ex) {
             System.err.println("Oops:SQL:" + ex.getErrorCode() + "/" + ex.getMessage());
         }
+        this.close();
     }
     
     

@@ -68,7 +68,7 @@ public class Editeur implements Comparable<Editeur> {
   
     @Override
     public String toString() {
-        return "Editeur{" + "id_editeur=" + id_editeur + ", nom=" + nom + ", email=" + email + ", telephone=" + telephone + '}';
+        return  nom ;
     }
 
     @Override

@@ -21,6 +21,7 @@ public class DAOediteur extends DAO{
     }
     
     public List<Editeur> select(){
+        this.open();
         List<Editeur> lesEditeurs = new ArrayList<>();
         try {
             Statement stmt = this.getConnection().createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
@@ -31,6 +32,7 @@ public class DAOediteur extends DAO{
 
             while (rs.next()) {
                 Editeur lEditeur = new Editeur(rs.getInt("ID_EDITEUR"), rs.getString("NOM"), rs.getString("EMAIL"), rs.getString("TELEPHONE"));
+                lEditeur.setLesOuvrages(this.getOuvragesByID(lEditeur));
                 lesEditeurs.add(lEditeur);
             }
 
@@ -40,11 +42,12 @@ public class DAOediteur extends DAO{
         } catch (SQLException ex) {
             System.err.println("Oops:SQL:" + ex.getErrorCode() + "/" + ex.getMessage());
         }
-        
+        this.close();        
         return lesEditeurs;
     }
     
     public void insert(Editeur e) {
+        this.open();
 
         try {
             String query = "INSERT INTO Editeur (nom, email, telephone) VALUES (?,?,?);";
@@ -62,10 +65,12 @@ public class DAOediteur extends DAO{
         } catch (SQLException ex) {
             System.err.println("Oops:SQL:" + ex.getErrorCode() + "/" + ex.getMessage());
         }
+        this.close();
 
     }
 
     public void update(Editeur e) {
+        this.open();
         
         try {
             String query = "UPDATE Editeur SET nom = ? , email = ? , telephone = ? WHERE id_editeur = ?;";
@@ -84,16 +89,19 @@ public class DAOediteur extends DAO{
         } catch (SQLException ex) {
             System.err.println("Oops:SQL:" + ex.getErrorCode() + "/" + ex.getMessage());
         }
+        this.close();
         
     }
     
     public void delete(Editeur e){
+        this.open();
         try {
             Statement stm = this.getConnection().createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
             stm.executeUpdate("DELETE FROM Editeur where id_editeur = " + e.getId_editeur());
         } catch (SQLException ex) {
             System.err.println("Oops:SQL:" + ex.getErrorCode() + "/" + ex.getMessage());
         }
+        this.close();
     }
     
     public List<Ouvrage> getOuvragesByID(Editeur e) {
@@ -105,7 +113,7 @@ public class DAOediteur extends DAO{
             PreparedStatement pstmt = this.getConnection().prepareStatement(query);
             pstmt.setInt(1, e.getId_editeur());
 
-            ResultSet rs = pstmt.executeQuery(query);
+            ResultSet rs = pstmt.executeQuery();
 
             while (rs.next()) {
                 Statut leStatut = new Statut(rs.getInt("ID_STATUT"), rs.getString("NOM_STATUT"));
@@ -124,6 +132,7 @@ public class DAOediteur extends DAO{
     }
     
     public void Publier(Editeur e, Ouvrage o){
+        this.open();
         
         try {
             String query = "INSERT INTO Publier VALUES (?,?);";
@@ -141,28 +150,33 @@ public class DAOediteur extends DAO{
         } catch (SQLException ex) {
             System.err.println("Oops:SQL:" + ex.getErrorCode() + "/" + ex.getMessage());
         }
-        
+        this.close();
     }
     
     public void deletePublier(Ouvrage o){
+        this.open();
         try {
             Statement stm = this.getConnection().createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
             stm.executeUpdate("DELETE FROM Publier where ISBN = " + o.getIsbn());
         } catch (SQLException ex) {
             System.err.println("Oops:SQL:" + ex.getErrorCode() + "/" + ex.getMessage());
         }
+        this.close();
     }
     
     public void deletePublier(Editeur e){
+        this.open();
         try {
             Statement stm = this.getConnection().createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
             stm.executeUpdate("DELETE FROM Publier where id_editeur = " + e.getId_editeur());
         } catch (SQLException ex) {
             System.err.println("Oops:SQL:" + ex.getErrorCode() + "/" + ex.getMessage());
         }
+        this.close();
     }
     
     public void deletePublier(Ouvrage o, Editeur e){
+        this.open();
         try {
             String query = "DELETE FROM Publier WHERE id_editeur = ? AND ISBN = ?";
             PreparedStatement pstmt = this.getConnection().prepareStatement(query);
@@ -173,6 +187,7 @@ public class DAOediteur extends DAO{
         } catch (SQLException ex) {
             System.err.println("Oops:SQL:" + ex.getErrorCode() + "/" + ex.getMessage());
         }
+        this.close();
     }
     
     

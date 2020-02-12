@@ -46,21 +46,6 @@ public class Auteur extends Personne{
     }
     
     
-
-    @Override
-    public String toString() {
-        
-        String s;
-        if (id_auteur>0){
-            s =  super.toString()+ "Auteur{" + "id_auteur=" + id_auteur + ", date_de_deces=" + date_de_deces + '}';
-        }else {
-            s =  super.toString()+ "Auteur{" + ", date_de_deces=" + date_de_deces + '}';
-        }
-        return s;
-        
-    }
-    
-    
     
     
 }

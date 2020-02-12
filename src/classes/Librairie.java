@@ -1,6 +1,7 @@
 package classes;
 
 import java.util.*;
+import data.*;
 
 
 public class Librairie {
@@ -22,12 +23,25 @@ public class Librairie {
     private List <Livraison> lesLivraisons;
     private List <Organisme_Paiement> lesOrganisme_Paiements;
     private List <Paiement> lesPaiements;
-    
+    private DAOsous_theme daoSt = new DAOsous_theme();
+    private DAOtheme daoTh = new DAOtheme();
+    private DAOauteur daoAuth = new DAOauteur();    
+    private DAOediteur daoEdt = new DAOediteur();
+    private DAOevenement daoEvt = new DAOevenement();
+            
     
     public Librairie() {
     }
     
-   /* GETTERS AND SETTERS*/
+    public void load(){
+        this.lesThemes = daoTh.select();
+        this.lesSous_themes = daoSt.select();
+        this.lesAuteurs = daoAuth.select();
+        this.lesEditeurs = daoEdt.select();
+        this.lesEvenements = daoEvt.select();
+    }
+    
+   /* GETTERS AND SETTERS -----------------------------------------------------------------------------------------------------------------------------------------------------------*/
     
     public List<Membre> getLesMembres() {
         return lesMembres;
@@ -174,7 +188,7 @@ public class Librairie {
     }
 
     
-     /* METHODE POUR AJOUTER DES OBJETS AUX TABLEAUX*/
+     /* METHODE POUR AJOUTER DES OBJETS AUX TABLEAUX -------------------------------------------------------------------------------------------------------------------------------*/
     
     public void AjouterAdresse (Adresse adresse){
         this.lesAdresses.add(adresse);
@@ -192,8 +206,6 @@ public class Librairie {
     public void AjouterCommentaire (Commentaire commentaire){
         this.lesCommentaires.add(commentaire);
     }
-    
-
     
     public void AjouterEditeur (Editeur editeur){
         this.lesEditeurs.add(editeur);
@@ -236,9 +248,17 @@ public class Librairie {
         this.lesPaiements.add(paiement);
     } 
 
-     
     public void AjouterSous_theme(Sous_theme sous_theme){
         this.lesSous_themes.add(sous_theme);
+        for (Theme leTheme : this.lesThemes){
+            if (leTheme.equals(sous_theme.getTheme())){
+                leTheme.add(sous_theme);
+                break;
+            }
+        }
+        daoSt.open();
+        daoSt.insert(sous_theme);
+        daoSt.close();
     }
      
     public void AjouterStatut(Statut statut){
@@ -247,13 +267,16 @@ public class Librairie {
      
     public void AjouterTheme (Theme theme){
         this.lesThemes.add(theme);
+        daoTh.open();
+        daoTh.insert(theme);
+        daoTh.close();
     }
      
     public void AjouterTransporteur (Transporteur transporteur){
         this.lesTransporteurs.add(transporteur);
     }
     
-    /* METHODE POUR SUPPRIMER DES OBJETS AUX TABLEAUX*/
+    /* METHODE POUR SUPPRIMER DES OBJETS AUX TABLEAUX ------------------------------------------------------------------------------------------------------------------------------*/
     
     public void SupprimerAdresse (Adresse adresse){
         this.lesAdresses.add(adresse);
@@ -442,7 +465,9 @@ public class Librairie {
     }
     
     public void modifierTheme(Theme t){
-        t.setLibelle(t.getLibelle());
+//        t.setLibelle(t.getLibelle());
+        
+        daoTh.update(t);
        
     }
     

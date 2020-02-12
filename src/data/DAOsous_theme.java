@@ -20,6 +20,7 @@ public class DAOsous_theme extends DAO{
     }
     
     public List<Sous_theme> select(){
+        this.open();
         List<Sous_theme> lesSous_themes = new ArrayList<>();
         try {
             Statement stmt = this.getConnection().createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
@@ -40,17 +41,18 @@ public class DAOsous_theme extends DAO{
         } catch (SQLException ex) {
             System.err.println("Oops:SQL:" + ex.getErrorCode() + "/" + ex.getMessage());
         }
+        this.close();
         
         return lesSous_themes;
     }
     
     public void insert(Sous_theme st) {
-
+        this.open();
         try {
             String query = "INSERT INTO sous_theme(id_theme, libelle) VALUES (?,?);";
             PreparedStatement pstmt = getConnection().prepareStatement(query);
             pstmt.setInt(1, st.getTheme().getId_theme());
-            pstmt.setString(1, st.getLibelle());
+            pstmt.setString(2, st.getLibelle());
 
             int result = pstmt.executeUpdate();
 
@@ -61,10 +63,11 @@ public class DAOsous_theme extends DAO{
         } catch (SQLException ex) {
             System.err.println("Oops:SQL:" + ex.getErrorCode() + "/" + ex.getMessage());
         }
-
+        this.close();
     }
 
     public void update(Sous_theme st) {
+        this.open();
         try {
             String query = "UPDATE sous_theme SET id_theme = ? , libelle = ? WHERE id_sous_theme = ? ;";
             PreparedStatement pstmt = getConnection().prepareStatement(query);
@@ -81,15 +84,18 @@ public class DAOsous_theme extends DAO{
         } catch (SQLException ex) {
             System.err.println("Oops:SQL:" + ex.getErrorCode() + "/" + ex.getMessage());
         }
+        this.close();
     }
     
     public void delete(Sous_theme st){
+        this.open();
         try {
             Statement stm = this.getConnection().createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
             stm.executeUpdate("DELETE FROM Sous_theme where id_sous_theme = " + st.getId_sous_theme());
         } catch (SQLException ex) {
             System.err.println("Oops:SQL:" + ex.getErrorCode() + "/" + ex.getMessage());
         }
+        this.close();
     }
     
     public List<Ouvrage> getOuvragesByID(Sous_theme st) {
@@ -120,7 +126,7 @@ public class DAOsous_theme extends DAO{
     }
     
     public void Posseder(Sous_theme st, Ouvrage o){
-        
+        this.open();
         try {
             String query = "INSERT INTO Associer VALUES (?,?);";
             PreparedStatement pstmt = this.getConnection().prepareStatement(query);
@@ -137,28 +143,33 @@ public class DAOsous_theme extends DAO{
         } catch (SQLException ex) {
             System.err.println("Oops:SQL:" + ex.getErrorCode() + "/" + ex.getMessage());
         }
-        
+        this.close();
     }
     
     public void deletePosseder(Ouvrage o){
+        this.open();
         try {
             Statement stm = this.getConnection().createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
             stm.executeUpdate("DELETE FROM Posseder where ISBN = " + o.getIsbn());
         } catch (SQLException ex) {
             System.err.println("Oops:SQL:" + ex.getErrorCode() + "/" + ex.getMessage());
         }
+        this.close();
     }
     
     public void deletePosseder(Sous_theme st){
+        this.open();
         try {
             Statement stm = this.getConnection().createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
             stm.executeUpdate("DELETE FROM Posseder where id_sous_theme = " + st.getId_sous_theme());
         } catch (SQLException ex) {
             System.err.println("Oops:SQL:" + ex.getErrorCode() + "/" + ex.getMessage());
         }
+        this.close();
     }
     
     public void deletePosseder(Ouvrage o, Sous_theme st){
+        this.open();
         try {
             String query = "DELETE FROM Posseder WHERE id_sous_theme = ? AND ISBN = ?";
             PreparedStatement pstmt = this.getConnection().prepareStatement(query);
@@ -169,6 +180,7 @@ public class DAOsous_theme extends DAO{
         } catch (SQLException ex) {
             System.err.println("Oops:SQL:" + ex.getErrorCode() + "/" + ex.getMessage());
         }
+        this.close();
     }
     
     

@@ -46,6 +46,35 @@ public class DAOauteur extends DAO {
 
         return lesAuteurs;
     }
+    
+    public List<Auteur> select(String recherche) {
+        this.open();
+        List<Auteur> lesAuteurs = new ArrayList<>();
+        try {
+
+            String query = "SELECT * FROM Auteur WHERE nom like ? or prenom like ?;";
+            PreparedStatement pstmt = this.getConnection().prepareStatement(query);
+            pstmt.setString(1, "%"+recherche+"%");
+            pstmt.setString(2, "%"+recherche+"%");
+
+            ResultSet rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+                Auteur lAuteur = new Auteur(rs.getInt("ID_AUTEUR"), rs.getString("NOM"), rs.getString("PRENOM"), rs.getString("DATE_DE_NAISSANCE"), rs.getString("DATE_DE_DECES"));
+                lAuteur.setLesOuvrages(this.getOuvragesByID(lAuteur));
+                lesAuteurs.add(lAuteur);
+            }
+
+            rs.close();
+            pstmt.close();
+
+        } catch (SQLException ex) {
+            System.err.println("Oops:SQL:" + ex.getErrorCode() + "/" + ex.getMessage());
+        }
+        this.close();
+
+        return lesAuteurs;
+    }
 
     public void insert(Auteur a) {
         this.open();

@@ -8,18 +8,20 @@ public class Editeur implements Comparable<Editeur> {
     private String nom;
     private String email;
     private String telephone;
+    private Statut leStatut;
     private List<Ouvrage> lesOuvrages;
 
     public Editeur() {
     }
 
-    public Editeur(String nom, String email, String telephone) {
+    public Editeur(Statut statut, String nom, String email, String telephone) {
+        this.leStatut = statut;
         this.nom = nom;
         this.email = email;
         this.telephone = telephone;
     }
 
-    public Editeur(int id_editeur, String nom, String email, String telephone) {
+    public Editeur(int id_editeur, Statut statut, String nom, String email, String telephone) {
         this.id_editeur = id_editeur;
         this.nom = nom;
         this.email = email;
@@ -56,6 +58,14 @@ public class Editeur implements Comparable<Editeur> {
 
     public void setTelephone(String telephone) {
         this.telephone = telephone;
+    }
+
+    public Statut getLeStatut() {
+        return leStatut;
+    }
+
+    public void setLeStatut(Statut leStatut) {
+        this.leStatut = leStatut;
     }
 
     public List<Ouvrage> getLesOuvrages() {

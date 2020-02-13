@@ -26,12 +26,13 @@ public class DAOediteur extends DAO{
         try {
             Statement stmt = this.getConnection().createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
 
-            String query = "SELECT * FROM Editeur;";
+            String query = "SELECT e.*, s.NOM_STATUT FROM Editeur e, Statut s WHERE e.id_Statut = s.id_statut;";
 
             ResultSet rs = stmt.executeQuery(query);
 
             while (rs.next()) {
-                Editeur lEditeur = new Editeur(rs.getInt("ID_EDITEUR"), rs.getString("NOM"), rs.getString("EMAIL"), rs.getString("TELEPHONE"));
+                Statut leStatut = new Statut(rs.getInt("id_statut"), rs.getString("NOM_STATUT"));
+                Editeur lEditeur = new Editeur(rs.getInt("ID_EDITEUR"), leStatut, rs.getString("NOM"), rs.getString("EMAIL"), rs.getString("TELEPHONE"));
                 lEditeur.setLesOuvrages(this.getOuvragesByID(lEditeur));
                 lesEditeurs.add(lEditeur);
             }

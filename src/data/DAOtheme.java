@@ -45,6 +45,34 @@ public class DAOtheme extends DAO{
         return lesThemes;
     }
     
+    public List<Theme> select(String recherche){
+        this.open();
+        List<Theme> lesThemes = new ArrayList<>();
+        try {
+
+            String query = "SELECT * FROM Theme WHERE libelle like ?;";
+            
+            PreparedStatement pstmt = this.getConnection().prepareStatement(query);
+            pstmt.setString(1, "%"+recherche+"%");
+
+            ResultSet rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+                Theme leTheme = new Theme(rs.getInt("ID_THEME"), rs.getString("LIBELLE"));
+                leTheme.setLeSous_themes(this.getSousThemeByID(leTheme));
+                lesThemes.add(leTheme);
+            }
+
+            rs.close();
+            pstmt.close();
+
+        } catch (SQLException ex) {
+            System.err.println("Oops:SQL:" + ex.getErrorCode() + "/" + ex.getMessage());
+        }
+        this.close();
+        return lesThemes;
+    }
+    
     public void insert(Theme t) {
         this.open();
 

@@ -32,13 +32,29 @@ public class Librairie {
     
     public Librairie() {
     }
-    
+    /*Chargement des Arraylist de la base*/
     public void load(){
         this.lesThemes = daoTh.select();
         this.lesSous_themes = daoSt.select();
         this.lesAuteurs = daoAuth.select();
         this.lesEditeurs = daoEdt.select();
         this.lesEvenements = daoEvt.select();
+    }
+    
+    public void loadAuteur(){
+        this.lesAuteurs = daoAuth.select();
+    }
+    
+    public void loadAuteur(String recherche){
+        this.lesAuteurs = daoAuth.select(recherche);
+    }
+    
+    public void loadTheme(){
+        this.lesThemes = daoTh.select();
+    }
+    
+    public void loadTheme(String recherche){
+        this.lesThemes = daoTh.select(recherche);
     }
     
    /* GETTERS AND SETTERS -----------------------------------------------------------------------------------------------------------------------------------------------------------*/
@@ -197,6 +213,7 @@ public class Librairie {
     
     public void AjouterAuteur (Auteur auteur){
         this.lesAuteurs.add(auteur);
+        daoAuth.insert(auteur);
     }
     
     public void AjouterCommande (Commande commande){
@@ -251,7 +268,7 @@ public class Librairie {
     public void AjouterSous_theme(Sous_theme sous_theme){
         this.lesSous_themes.add(sous_theme);
         for (Theme leTheme : this.lesThemes){
-            if (leTheme.equals(sous_theme.getTheme())){
+            if (leTheme.getLibelle().equals(sous_theme.getTheme().getLibelle())){
                 leTheme.add(sous_theme);
                 break;
             }
@@ -360,10 +377,11 @@ public class Librairie {
     }
     
     public void modifierAuteur(Auteur a){
-        a.setNom(a.getNom());
-        a.setPrenom(a.getPrenom());
-        a.setDate_de_naissance(a.getDate_de_naissance());
-        a.setDate_de_deces(a.getDate_de_deces());
+//        a.setNom(a.getNom());
+//        a.setPrenom(a.getPrenom());
+//        a.setDate_de_naissance(a.getDate_de_naissance());
+//        a.setDate_de_deces(a.getDate_de_deces());
+        daoAuth.update(a);
     }
     
     public void modifierCommande(Commande c){
@@ -455,8 +473,8 @@ public class Librairie {
     
     
     public void modifierSous_theme(Sous_theme st){
-        st.setLibelle(st.getLibelle());
-       
+//        st.setLibelle(st.getLibelle());
+       daoSt.update(st);
     }
     
     public void modifierStatut(Statut s){
@@ -466,7 +484,6 @@ public class Librairie {
     
     public void modifierTheme(Theme t){
 //        t.setLibelle(t.getLibelle());
-        
         daoTh.update(t);
        
     }

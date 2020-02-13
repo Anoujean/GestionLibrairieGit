@@ -22,6 +22,7 @@ public class Ouvrage implements Comparable<Ouvrage> {
     private List<Mot_clef> lesMot_clefs;
     private List<Sous_theme> lesSous_themes;
     private List<Auteur> lesAuteurs;
+    private List<Editeur> lesEditeurs;
 
     public Ouvrage() {
     }
@@ -213,6 +214,14 @@ public class Ouvrage implements Comparable<Ouvrage> {
 
     public void setLesAuteurs(List<Auteur> lesAuteurs) {
         this.lesAuteurs = lesAuteurs;
+    }
+
+    public List<Editeur> getLesEditeurs() {
+        return lesEditeurs;
+    }
+
+    public void setLesEditeurs(List<Editeur> lesEditeurs) {
+        this.lesEditeurs = lesEditeurs;
     }
     
     @Override

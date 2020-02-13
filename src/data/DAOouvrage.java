@@ -132,7 +132,7 @@ public class DAOouvrage extends DAO {
             PreparedStatement pstmt = this.getConnection().prepareStatement(query);
             pstmt.setString(1, o.getIsbn());
 
-            ResultSet rs = pstmt.executeQuery(query);
+            ResultSet rs = pstmt.executeQuery();
 
             while (rs.next()) {
                 Auteur lAuteur = new Auteur(rs.getInt("ID_AUTEUR"), rs.getString("NOM"), rs.getString("PRENOM"), rs.getString("DATE_DE_NAISSANCE"), rs.getString("DATE_DE_DECES"));
@@ -158,7 +158,7 @@ public class DAOouvrage extends DAO {
             PreparedStatement pstmt = this.getConnection().prepareStatement(query);
             pstmt.setString(1, o.getIsbn());
 
-            ResultSet rs = pstmt.executeQuery(query);
+            ResultSet rs = pstmt.executeQuery();
 
             while (rs.next()) {
                 Mot_clef leMot_clef = new Mot_clef(rs.getInt("ID_MOT_CLEF"), rs.getString("LIBELLE"));
@@ -247,7 +247,7 @@ public class DAOouvrage extends DAO {
             PreparedStatement pstmt = this.getConnection().prepareStatement(query);
             pstmt.setString(1, o.getIsbn());
 
-            ResultSet rs = pstmt.executeQuery(query);
+            ResultSet rs = pstmt.executeQuery();
 
             while (rs.next()) {
                 Theme leTheme = new Theme(rs.getInt("ID_THEME"), rs.getString("LIBELLE_THEME"));
@@ -274,7 +274,7 @@ public class DAOouvrage extends DAO {
             PreparedStatement pstmt = this.getConnection().prepareStatement(query);
             pstmt.setString(1, o.getIsbn());
 
-            ResultSet rs = pstmt.executeQuery(query);
+            ResultSet rs = pstmt.executeQuery();
 
             while (rs.next()) {
                 Statut leStatut = new Statut(rs.getInt("ID_STATUT"), rs.getString("NOM_STATUT"));
@@ -291,6 +291,34 @@ public class DAOouvrage extends DAO {
         }
             
         return lesEvenements;
+    }
+    
+    public List<Editeur> getEditeursByID(Ouvrage o) {
+        List<Editeur> lesEditeurs = new ArrayList<>();
+        
+        try {
+            String query = "select edt.*, stedt.NOM_STATUT from editeur edt, publier p, ouvrage o, statut stedt where edt.ID_EDITEUR = p.ID_EDITEUR  and p.ISBN = o.ISBN and edt.ID_STATUT = stedt.ID_STATUT and o.ISBN = ?;";
+
+            PreparedStatement pstmt = this.getConnection().prepareStatement(query);
+            pstmt.setString(1, o.getIsbn());
+
+            ResultSet rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+                Statut leStatut = new Statut(rs.getInt("ID_STATUT"), rs.getString("NOM_STATUT"));
+                Editeur lEditeur = new Editeur(rs.getInt("ID_EDITEUR"), leStatut, rs.getString("NOM"), rs.getString("EMAIL"), rs.getString("TELEPHONE"));
+                
+                lesEditeurs.add(lEditeur);
+            }
+
+            rs.close();
+            pstmt.close();
+
+        } catch (SQLException ex) {
+            System.err.println("Oops:SQL:" + ex.getErrorCode() + "/" + ex.getMessage());
+        }
+            
+        return lesEditeurs;
     }
     
     public void deleteAppartenir(Ouvrage o){
